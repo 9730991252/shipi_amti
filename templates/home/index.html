@@ -1,0 +1,294 @@
+{% extends 'home/base.html' %}
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock head %}
+{% block content %}
+{% include 'include/navbar.html' %}
+{% load static %}
+{% load home_tag %}
+{% load embed_video_tags %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<div class="container body">
+
+
+<div class="category_main_box">
+    {% for c in category %}
+        <button class="category_box">
+            {{c.name}}
+        </button>
+    {% endfor %}
+
+</div>
+
+<br>
+
+<div class="item_main_box">
+    {% for i in item %}
+        <div class="item_box" style="height: fit-content;">
+            <!-- img -->
+              <div id="carouselExample" class="carousel slide " data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="{% if i.image1.url != None %}{{i.image1.url}}{% endif %}"  alt="No Image">
+                  </div>
+                    {% if i.image2.url != None %}
+                    <div class="carousel-item active">
+                        <img src="{{i.image2.url}}"  alt="No Image">
+                    </div>
+                    {% endif %}
+                    {% if i.image3.url != None %}
+                    <div class="carousel-item active">
+                        <img src="{{i.image3.url}}"  alt="No Image">
+                    </div>
+                    {% endif %}
+                    {% if i.image4.url != None %}
+                    <div class="carousel-item active">
+                        <img src="{{i.image4.url}}"  alt="No Image">
+                    </div>
+                    {% endif %}
+                    {% if i.image5.url != None %}
+                    <div class="carousel-item active">
+                        <img src="{{i.image5.url}}"  alt="No Image">
+                    </div>
+                    {% endif %}
+                </div>
+              </div>
+              <!-- endimg -->
+
+              <div id="video{{i.id}}" style="display: none;">{% video i.youtube_url '280x215'  %}</div>
+            <!-- name -->
+             <div class="p-2">
+                 <div class="" style="display: flex; gap: 10px;justify-content: space-evenly;">
+                    <h4><b>{{i.name}}</b></h4>
+                    {% if i.youtube_url != None %}
+                        <div onclick="see_video('{{i.id}}')"><i class="fa fa-youtube-play" style="font-size:40px;color:red"></i></div>
+                        {% endif %}
+                </div>
+                 <p class="text-start" onclick="read_more('{{i.id}}')" id="main_description{{i.id}}" style="font-weight: 500;">{{i.description|slice:50}}... <button type="button" class="btn btn-sm text-danger">Read More</button></p>  
+                 <div id="description{{i.id}}" style="display: none;" >
+                     <p class="text-start" onclick="read_less('{{i.id}}')" >{{i.description}}</p>  
+                     {% video i.youtube_url '280x200'  %}
+                     <button type="button" onclick="read_less('{{i.id}}')" class="btn btn-sm text-success">Read Less</button>
+                </div>
+            </div>
+            <!-- endname -->
+             <div class="footer">
+                {% price_and_weight i.id  %}
+
+
+                <div id="mob{{i.id}}" style="display: none;">
+                    <h6>Enter Delivery Information </h6>
+                    <input type="number" style="width: 200px;margin: 0 auto;border: 1px solid black;" oninput="check_number('{{i.id}}')" id="mo{{i.id}}" class="form-control" placeholder="Enter Mobile Number " >
+                    <button style="display: none;" type="button" class="mt-2 btn btn-danger" id="submit_btn{{i.id}}" onclick="check_customer('{{i.id}}')">Submit</button>
+                  </div>
+
+                <div id="qty_box{{i.id}}"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+
+<!----------------------------------------------------------------------------->
+<style>
+    .main_footer{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #d3d3d3;
+        padding: 10px;
+        text-align: center;
+        right: 0;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        align-items: center;
+    }
+</style>
+<div class="main_footer">
+
+    <div><input type="text" class="form-control w-100" placeholder="Search Item"></div>
+    <div> <b>Rs.</b><b id="total_amount">{{total_amount}}</b></div>
+    <div><a href="/order/cart/" id="place_order_btn" class="btn btn-warning btn-sm" {% if total_amount == 0 %} style="pointer-events: none;" {% endif %} > <i class="fa-solid fa-cart-shopping"></i> <b id="cart_qty" style="border-radius: 50%; padding: 2px;background-color: red;color: white;">{{cart_qty}}</b> </a></div>
+
+</div>
+
+<br><br>
+<br><br>
+<br><br>
+<!----------------------------------------------------------------------------->
+<script>
+    see_video_last_id = ''
+function see_video(id){
+    if(see_video_last_id == id){
+        document.getElementById('video'+id).style.display = 'none';
+    }
+    else{
+        document.getElementById('video' + id).style.display = 'unset'; 
+    }
+    see_video_last_id = id
+    console.log(see_video_last_id)
+}
+function read_more(id){
+    document.getElementById('main_description'+id).style.display = 'none';
+    document.getElementById('description'+id).style.display = 'unset';
+}
+function read_less(id){
+    document.getElementById('main_description'+id).style.display = 'unset';
+    document.getElementById('description'+id).style.display = 'none';
+}
+
+last_price_and_weight_id = ''
+last_qty_box_id = ''
+
+function add_to_cart(item_id, prise_and_weight_id, customer_id) {
+    qty = document.getElementById('qty'+item_id).value
+    $.ajax({
+        url: "{% url 'add_to_cart' %}",
+        method: "GET",
+        data:{
+            item_id:item_id,
+            qty:qty,
+            prise_and_weight_id:prise_and_weight_id,
+            customer_id:customer_id
+        },
+        success: function(res){
+            document.getElementById('total_amount').innerText = res.total_amount
+            document.getElementById('qty_box'+item_id).innerHTML = `<div class="mt-2 alert alert-success">This Item is added to Cart</div>`                    
+            document.getElementById('place_order_btn').style.display = 'unset';
+            document.getElementById('cart_qty').innerText = res.cart_qty;
+            location.reload()
+        }
+    });
+}
+
+
+function check_number(id){
+    mobile=document.getElementById('mo'+id).value;
+            if (mobile.length <= 9 ){
+            document.getElementById('mo'+id).style.borderColor ='green';return false;
+            document.getElementById('submit_btn'+id).style.display = 'none';
+        }
+        if (mobile.length >= 11 ){
+            alert('only 10 digit number ')
+            document.getElementById('mo'+id).value='';
+            document.getElementById('submit_btn'+id).style.display = 'none';
+        }
+        if (mobile.length == 10 ){
+                document.getElementById('submit_btn'+id).style.display = 'unset';
+                
+                document.getElementById('mo'+id).style.borderColor ='';return true;
+                
+            }
+        }
+        
+new_prise_and_weight_id = ''
+last_id = ''
+function check_customer_sesion(p_id, prise_and_weight_id){
+    new_prise_and_weight_id = prise_and_weight_id
+    if ('{{customer}}' == ''){
+        document.getElementById('mob'+p_id).style.display = 'unset';
+        if (last_id){
+            if (last_id != p_id){
+                document.getElementById('mob'+last_id).style.display = 'none';
+            }
+        }
+        last_id = p_id;
+    }else{
+        $.ajax({
+            url: "{% url 'check_customer' %}",
+            method: "GET",
+            data:{
+                mobile:'{{customer.mobile}}',
+                prise_and_weight_id:prise_and_weight_id
+                },
+                success: function(res){
+
+                    document.getElementById('qty_box'+p_id).innerHTML = res.t                    
+                    if (last_qty_box_id){
+                        if (last_qty_box_id != p_id){
+                            document.getElementById('qty_box'+last_qty_box_id).innerHTML = ''
+                        }
+                    }
+                    last_qty_box_id= p_id                    
+                    if (last_price_and_weight_id){
+                        if (last_price_and_weight_id != prise_and_weight_id){
+                            document.getElementById('price_and_weight_btn'+last_price_and_weight_id).style.backgroundColor = 'transparent';
+                        }
+                    }
+                    document.getElementById('price_and_weight_btn'+prise_and_weight_id).style.backgroundColor = 'greenyellow';
+                    last_price_and_weight_id = prise_and_weight_id;
+                }
+
+        })
+    }
+
+}
+
+function plus(id, price){
+    var qty = document.getElementById('qty'+id).value
+    qty++;
+    document.getElementById('qty'+id).value=qty;
+    p=qty*price
+    document.getElementById('total_amount'+id).innerText=p;
+        //speak code
+        
+    const msg = new SpeechSynthesisUtterance;
+    msg.text=qty;
+    
+    msg.voice=speechSynthesis.getVoices()[1];
+    speechSynthesis.speak(msg);
+  
+}
+
+function minus(id, price, sell_minimum_quantity){
+    var qty = document.getElementById('qty'+id).value
+  if(qty > sell_minimum_quantity){
+    qty--;
+    document.getElementById('qty'+id).value=qty;
+    p=qty*price
+    document.getElementById('total_amount'+id).innerText=p;
+            //speak code
+            
+        const msg = new SpeechSynthesisUtterance;
+        msg.text=qty;
+        
+        msg.voice=speechSynthesis.getVoices()[1];
+        speechSynthesis.speak(msg);
+  }
+}
+function check_customer(id) {
+        var mobile=document.getElementById('mo'+id).value;
+        $.ajax({
+            url: "{% url 'check_customer' %}",
+            method: "GET",
+            data:{
+                mobile:mobile,
+                prise_and_weight_id:new_prise_and_weight_id
+            },
+                success: function(res){
+                    document.getElementById('mob'+last_id).style.display = 'none';
+                
+                    document.getElementById('qty_box'+id).innerHTML = res.t                    
+                    if (last_qty_box_id){
+                        if (last_qty_box_id != id){
+                            document.getElementById('qty_box'+last_qty_box_id).innerHTML = ''
+                        }
+                    }
+                    last_qty_box_id= id
+                    if (last_price_and_weight_id){
+                        if (last_price_and_weight_id != prise_and_weight_id){
+                            document.getElementById('price_and_weight_btn'+last_price_and_weight_id).style.backgroundColor = 'transparent';
+                        }
+                    }
+                    document.getElementById('price_and_weight_btn'+prise_and_weight_id).style.backgroundColor = 'greenyellow';
+                    last_price_and_weight_id = prise_and_weight_id;
+                    location.reload()
+                }
+
+        })
+    }
+</script>
+{% endblock content %}

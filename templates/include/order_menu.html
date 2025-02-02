@@ -1,0 +1,27 @@
+<style>
+    .login{
+        display: none !important;;
+    }
+    .menu{
+        display: flex;
+        width: 100%;
+        overflow: scroll;
+        gap: 10px;
+    }
+    .order{
+        background-color: #ffc107;
+        border: #ffc107;
+        color: black;
+        &:hover{
+            color: black;
+            background-color: #f1b708;
+
+        }
+    }
+</style>
+<div class="menu">
+    <a  href="/order/pending_order/" class="my-1 {% if request.path == '/order/pending_order/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Pendding</a>
+    <a  href="/order/accepted/" class="my-1 {% if request.path == '/order/accepted/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Accepted</a>
+    <a  href="/order/delivered/" class="my-1 {% if request.path == '/order/delivered/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Delivered</a>
+    <a  href="/order/cancel/" class="my-1 {% if request.path == '/order/cancel/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Cancel</a>
+</div>

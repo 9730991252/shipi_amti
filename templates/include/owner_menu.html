@@ -1,0 +1,18 @@
+<style>
+    .login{
+        display: none !important;;
+    }
+    .menu{
+        display: flex;
+        width: 100%;
+        overflow: scroll;
+        gap: 10px;
+    }
+</style>
+<div class="menu">
+    <a  href="/" class="my-1 {% if request.path == '/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Index</a>
+    <a  href="/owner/owner_home/" class="my-1 {% if request.path == '/owner/owner_home/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Home</a>
+    <a  href="/order/order/" class="order my-1 {% if request.path == '/order/order/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Order</a>
+    <a  href="/owner/item/" class="my-1 {% if request.path == '/owner/item/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Item</a>
+    <a  href="/owner/category/" class="my-1 {% if request.path == '/owner/category/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Category</a>
+</div>

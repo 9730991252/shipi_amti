@@ -1,0 +1,15 @@
+<div id="item_detail{{i.id}}"  {% if n.qty == 0 %} style="display: none;"{% endif %}>
+    <div class=" my-4 text-center" style="display: grid;grid-template-columns: 3fr 2fr;">
+      <div style="display: grid;grid-template-columns: 1fr 2fr 1fr;gap: 0px;">
+        <div class=" "><button type="button" onclick="minus('{{i.id}}','{{prisce_and_weight.price}}','{{prisce_and_weight.sell_minimum_quantity}}')" class="btn btn-success px-3">-</button></div>
+        <div class="">
+            <input type="text" name="qty" style="width: 60px; text-align: center;" id="qty{{i.id}}" value="{{prisce_and_weight.sell_minimum_quantity}}" >{{prisce_and_weight.unit}}
+        </div>
+        <div class=""><button type="button" onclick="plus('{{i.id}}','{{prisce_and_weight.price}}')" class="btn btn-success px-3">+</button></div>
+      </div>
+      <div class=""> <button type="submit" class="btn btn-danger" onclick="add_to_cart('{{i.id}}','{{prisce_and_weight.id}}', '{{customer.id}}')">Add To Cart</button> </div>
+    </div>
+    <div class="text-center">
+        <b>Rs. </b><b id="total_amount{{i.id}}">{{prisce_and_weight.price}}</b>
+    </div>
+  </div>
