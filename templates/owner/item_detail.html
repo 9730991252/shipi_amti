@@ -148,7 +148,10 @@
                 <input type="file" name="image5" placeholder="Image" class="form-control" value="{{item.image}}">
               </div>                                                  
             <div class="mb-3">                                      
-                <button type="submit" class="btn btn-primary" name="Edit_item">Edit</button>
+                <button type="submit" class="btn btn-primary" name="Edit_item" onclick="this.style.display = 'none';spinner.style.display = 'flex'">Edit</button>
+                <div class="spinner-border text-dark" style="display: none;" id="spinner" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
           </form>
         </div>
