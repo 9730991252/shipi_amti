@@ -2,6 +2,9 @@
 {% block head %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<meta property="og:image" content="https://shipiamti.com{{i.image1.url}}">
+
+
 {% endblock head %}
 {% block content %}
 {% include 'include/navbar.html' %}
@@ -61,10 +64,13 @@
              <div class="p-2">
                  <div class="" style="display: flex; gap: 10px;justify-content: space-evenly;">
                     <h4><b>{{i.name}}</b></h4>
+                    </div>
+                 <div class="" style="display: flex; gap: 10px;justify-content: space-evenly;">
                     {% if i.youtube_url != None %}
-                        <div onclick="see_video('{{i.id}}')"><i class="fa fa-youtube-play" style="font-size:40px;color:red"></i></div>
+                        <div onclick="see_video('{{i.id}}')"><i class="fa fa-youtube-play" style="font-size:30px;color:red"></i></div>
                         {% endif %}
-                </div>
+                    <div><a href="https://api.whatsapp.com/send?phone=&text=https://www.shipiamti.com/" target="_blank"><i class="fa-brands fa-whatsapp" style="color: green; font-size: 30px;"></i></a></div>
+                    </div>
                  <p class="text-start" onclick="read_more('{{i.id}}')" id="main_description{{i.id}}" style="font-weight: 500;">{{i.description|slice:50}}... <button type="button" class="btn btn-sm text-danger">Read More</button></p>  
                  <div id="description{{i.id}}" style="display: none;" >
                      <p class="text-start" onclick="read_less('{{i.id}}')" >{{i.description}}</p>  

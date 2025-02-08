@@ -15,9 +15,26 @@ def compress(image):
     
     im_io = BytesIO()
     rgb_im.save(im_io, format=im.format, quality=50)
+    
     new_image = File(im_io, name=image.name)
     return new_image
-    
+
+from django.core.files.base import ContentFile
+
+def convert_image_to_webp(image_field):
+    try:
+        # Open the image using Pillow
+        image = Image.open(image_field)
+        # Create a BytesIO object to hold the WebP data
+        webp_io = BytesIO()
+        # Save the image in WebP format to the BytesIO object
+        image.save(webp_io, format='WEBP', quality=50)
+        # Create a ContentFile from the BytesIO object
+        webp_content = ContentFile(webp_io.getvalue(), name=f"{image_field.name.rsplit('.', 1)[0]}.webp")
+        return webp_content
+    except Exception as e:
+        print(f"Error converting image to WebP: {e}")
+        return None
     
 class Item(models.Model):
     name = models.CharField(max_length=255)
@@ -31,26 +48,28 @@ class Item(models.Model):
     status = models.IntegerField(default=1)
     
     def save (self, *args, **kwargs):
-        new_image1 = compress(self.image1)
-        self.image1 = new_image1
-        
+        if self.image1:
+            webp_image = convert_image_to_webp(self.image1)
+            self.image1.save(webp_image.name, webp_image, save=False)
+
         if self.image2:
-            new_image2 = compress(self.image2)
-            self.image2 = new_image2
+            webp_image = convert_image_to_webp(self.image2)
+            self.image2.save(webp_image.name, webp_image, save=False)
             
         if self.image3:
-            new_image3 = compress(self.image3)
-            self.image3 = new_image3
+            webp_image = convert_image_to_webp(self.image3)
+            self.image3.save(webp_image.name, webp_image, save=False)
         
         if self.image4:
-            new_image4 = compress(self.image4)
-            self.image4 = new_image4
-        
+            webp_image = convert_image_to_webp(self.image4)
+            self.image4.save(webp_image.name, webp_image, save=False)
+            
         if self.image5:
-            new_image5 = compress(self.image5)
-            self.image5 = new_image5
+            webp_image = convert_image_to_webp(self.image5)
+            self.image5.save(webp_image.name, webp_image, save=False)
         
         super().save(*args, **kwargs)
+        
 
             
 class Price_and_weight(models.Model):

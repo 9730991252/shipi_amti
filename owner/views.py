@@ -3,7 +3,7 @@ from .models import *
 from django.views.decorators.csrf import csrf_exempt
 from PIL import Image
 import io
-
+import time
 # Create your views here.
 def owner_home(request):
     if request.session.has_key('owner_mobile'):
@@ -126,28 +126,37 @@ def item_detail(request, id):
             p.status = 1
             p.save()
             return redirect('item_detail', id=id )
-        if 'Edit_item'in request.POST:
+        if 'Edit_item'in request.POST:            
             image1 = request.FILES.get('image1')
-            if image1 is None:
-                image1 = items.image1
+            
+            if image1 == None:
+                pass
+            else:
+                items.image1 = image1
                 
             image2 = request.FILES.get('image2')
             if image2 is None:
                 image2 = items.image2
+            else:
+                items.image2 = image2
+                
             image3 = request.FILES.get('image3')
             if image3 is None:
                 image3 = items.image3
+            else:
+                items.image3 = image3
+                
             image4 = request.FILES.get('image4')
             if image4 is None:
                 image4 = items.image4
+            else:
+                items.image4 = image4
+                
             image5 = request.FILES.get('image5')
             if image5 is None:
                 image5 = items.image5
-            items.image1 = image1
-            items.image2 = image2
-            items.image3 = image3
-            items.image4 = image4
-            items.image5 = image5
+            else:
+                items.image5 = image5
             items.save()
             return redirect('item_detail', id=id)
         if 'select_item_category'in request.POST:

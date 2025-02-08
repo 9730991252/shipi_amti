@@ -21,6 +21,7 @@ def check_customer(request):
                     mobile=mobile,
                 ).save()
                 request.session['customer_mobile'] = mobile
+            customer = Customer.objects.filter(mobile=mobile, status=1).first()
         price_and_weight = Price_and_weight.objects.filter(id=prise_and_weight_id).first()
         context ={
             'prisce_and_weight_id': prise_and_weight_id,
@@ -36,13 +37,13 @@ def add_to_cart(request):
     if request.method == 'GET':
         item_id = request.GET['item_id']
         qty = request.GET['qty']
-        price_and_weight = request.GET['prise_and_weight_id']
+        prise_and_weight_id = request.GET['prise_and_weight_id']
         customer_id = request.GET['customer_id']
         customer = ''
         if customer_id:
             customer = Customer.objects.filter(id=customer_id).first()
         # print('item_id =', item_id,   'qty =', qty,   'prise_and_weight_id =', prise_and_weight_id,   'customer_id =', customer_id,  )
-        c = Cart.objects.filter(item_id=item_id,price_and_weight_id=price_and_weight, customer_id=customer_id).first()
+        c = Cart.objects.filter(item_id=item_id,price_and_weight_id=prise_and_weight_id, customer_id=customer_id).first()
         if c != None:
             c.qty = qty
             c.save()
@@ -50,7 +51,7 @@ def add_to_cart(request):
             Cart(
                 item_id=item_id,
                 qty=qty,
-                price_and_weight_id=price_and_weight,
+                price_and_weight_id=prise_and_weight_id,
                 customer_id=customer_id,
             ).save()
         return JsonResponse({"total_amount": total_price(customer_id), 'cart_qty':Cart.objects.filter(customer_id=customer.id).count()})

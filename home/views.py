@@ -42,8 +42,8 @@ def index(request):
         'item':Item.objects.filter(status=1),
         'customer':customer,
         'total_amount':total_amount,
-        'cart_qty':Cart.objects.filter(customer_id=customer_id).count()
-        
+        'cart_qty':Cart.objects.filter(customer_id=customer_id).count(),
+        'i':Item.objects.all().first()
     }
     return render(request, 'home/index.html', contaxt)
 
@@ -67,6 +67,8 @@ def total_price(customer_id):
     return total_amount
 
 def login(request):
+    if request.session.has_key('owner_mobile'):
+        return redirect('owner_home')
     if request.method == 'POST':
         mobile = request.POST.get('number')
         pin = request.POST.get('pin')
