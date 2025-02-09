@@ -1,11 +1,9 @@
-
 {% extends 'home/base.html' %}
 {% block head %}
 {% endblock head %}
 {% block content %}
-
 {% include 'include/owner_menu.html' %}
-
+{% include 'include/hotel_menu.html' %}
 
 <div class="container">
 
@@ -27,11 +25,6 @@
             <div class="mb-3">
                 <label for="">Name</label>
                 <input type="text" placeholder="Name" name="name" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="">Description </label>
-                <textarea name="description" placeholder="Description" class="form-control" required></textarea>
             </div>                                                  
             <div class="mb-3">                                      
                 <button type="submit" class="btn btn-primary" name="add_category">Add</button>

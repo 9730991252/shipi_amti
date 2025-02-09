@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'order',
     'sunil',
     'embed_video',
+    'hotel',
 ]
 
 MIDDLEWARE = [

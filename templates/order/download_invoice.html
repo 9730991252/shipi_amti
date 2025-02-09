@@ -36,18 +36,17 @@
         }
     }
 </style>
-
 <div id="canvas">
 <div class="main_box" style="width: 8in;margin: 0 auto;">
     <br>
         <div class="text-center"><b>Invoice</b></div>
         <div class="web_detail_box">
-            <h5><b>Shipi Amti</h5>
-            <div class="detail_box">
-                <div style="width: 50%;" >Phone: <b>9730268423</b></div>
-                <div >Email: <b>shiraskarshipiamti@gmail.com</b></div>
-            </div>
-            <br>
+                <h5><b>Shipi Amti</h5>
+                <div class="detail_box">
+                    <div style="width: 50%;" >Phone: <b>9730268423/9561190035</b></div>
+                    <div >Email: <b>shiraskarshipiamti@gmail.com</b></div>
+                </div>
+                <br>
         </div>
 
         <div class="ps-2" style="display: grid;grid-template-columns: 1fr 1fr;border: 1px solid black;border-top:none ;background-color: rgb(230, 230, 230);">
@@ -78,8 +77,8 @@
                 <div >{{forloop.counter}}</div>
                 <div >{{o.item.name}} ({{o.weight}}{{o.unit}})</div>
                 <div class=" text-end">{{o.qty}}</div>
-                <div class="text-end"><b>₹{{o.price}}0</b></div>
-                <div  class="text-end"><b>₹</b><b id="total_price{{o.id}}"></b></div>
+                <div class="text-end">₹{{o.price}}0</div>
+                <div  class="text-end">₹<h id="total_price{{o.id}}"></h></div>
                 <script>
                     t = Number('{{o.qty}}') * Number('{{o.price}}')
                     document.getElementById('total_price{{o.id}}').innerHTML = t.toFixed(2)
@@ -89,7 +88,7 @@
         <div class="mb-2" style="display: grid;grid-template-columns: 3fr 2fr;border: 1px solid black;border-top:none ;">
             <div style="border-right: 1px solid black;"></div>
             <div style="font-weight: 400;">
-                <div style="display: grid;grid-template-columns: 3fr 0.1fr 3fr; padding: 3px;">
+                <div style="display: grid;grid-template-columns: 3fr 0.1fr 3fr; padding: 3px;font-weight: 700;">
                     <div>Total</div> <div>:</div>  <div style="display: flex; justify-content: end;" id="sub_total"></div>
                     <script>
                         sub_total = (Number('{{order_master.total_amount}}') - Number('{{order_master.courier_charges}}'))
@@ -106,7 +105,7 @@
         </div>
         <div class="ps-2" style="display: grid; grid-template-columns: 3fr 2fr;">
             <div>
-                <img src="{% static 'img/qr2.png' %}" alt="123">
+                <img src="{% static 'img/qr2.png' %}">
             </div>
             <div style="border: 1px solid black;border-top: none;font-weight: 400;">
                 <div style="background-color: rgb(230, 230, 230);padding-left: 3px;">For Narayniorder.Com:</div>
@@ -127,26 +126,25 @@
     <h6><a href="https://bookkaryalay.com/contact_us/" style="text-decoration: none;color: black;">सर्व प्रकारचे बारकोड व बिलिंग सॉफ्टवेअर तयार करून मिळतील &nbsp; PRASANNA DIGITAL - 9730991252</a></h6>
 </div>
 <br>
+
+
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+const screenshotTarget = document.getElementById("canvas");
 
+html2canvas(screenshotTarget).then((canvas) => {
+    const base64image = canvas.toDataURL("image/jpeg");
+    var anchor  = document.createElement("a");
+    anchor.setAttribute("href", base64image);
+    anchor.setAttribute("download", '{{order_master.customer.name}} '+ new Date().toLocaleString() +' .jpeg');
+    anchor.click();
+    
+    window.location.href = "{% url 'pending_view_order' order_filter=order_master.order_filter %}"
 
+})
 
-
-
-
-var canvas = document.getElementById("canvas");
-
-
-domtoimage.toJpeg(canvas).then((data)=>{
-            var link =  document.createElement("a");
-            link.download = '{{order_master.customer.name}} '+ new Date().toLocaleString() +' .jpeg';
-            link.href = data;
-            link.click();
-            
-            window.location.href = "{% url 'accepted_view_order' order_master.order_filter %}";
-        });
     </script>
 {% endblock content %}

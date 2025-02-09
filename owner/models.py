@@ -5,36 +5,23 @@ from django.core.files import File
 # Create your models here.
 from embed_video.fields import EmbedVideoField 
 # Create your models here.
+from django.core.files.base import ContentFile
 class Category(models.Model):
     name = models.CharField(max_length=255)
     status = models.IntegerField(default=1)
-    
-def compress(image):
-    im = Image.open(image)
-    rgb_im = im.convert("RGB")
-    
-    im_io = BytesIO()
-    rgb_im.save(im_io, format=im.format, quality=50)
-    
-    new_image = File(im_io, name=image.name)
-    return new_image
 
-from django.core.files.base import ContentFile
-
-def convert_image_to_webp(image_field):
-    try:
-        # Open the image using Pillow
-        image = Image.open(image_field)
-        # Create a BytesIO object to hold the WebP data
-        webp_io = BytesIO()
-        # Save the image in WebP format to the BytesIO object
-        image.save(webp_io, format='WEBP', quality=50)
-        # Create a ContentFile from the BytesIO object
-        webp_content = ContentFile(webp_io.getvalue(), name=f"{image_field.name.rsplit('.', 1)[0]}.webp")
-        return webp_content
-    except Exception as e:
-        print(f"Error converting image to WebP: {e}")
-        return None
+# def convert_image_to_webp(image_field):
+#     try:
+#         image = Image.open(image_field)
+#         webp_io = BytesIO()
+#         # Save the image in WebP format to the BytesIO object
+#         image.save(webp_io, format='WEBP', quality=50)
+#         # Create a ContentFile from the BytesIO object
+#         webp_content = ContentFile(webp_io.getvalue(), name=f"{image_field.name.rsplit('.', 1)[0]}.webp")
+#         return webp_content
+#     except Exception as e:
+#         print(f"Error converting image to WebP: {e}")
+#         return None
     
 class Item(models.Model):
     name = models.CharField(max_length=255)
@@ -47,28 +34,33 @@ class Item(models.Model):
     image5 = models.ImageField(upload_to='item_images/', blank=True, null=True)
     status = models.IntegerField(default=1)
     
-    def save (self, *args, **kwargs):
-        if self.image1:
-            webp_image = convert_image_to_webp(self.image1)
-            self.image1.save(webp_image.name, webp_image, save=False)
+    # def save (self, *args, **kwargs):
+    #     if self.image1:
+    #         webp_image1 = convert_image_to_webp(self.image1)
+    #         if webp_image1:
+    #             self.image1.save(webp_image1.name, webp_image1, save=False)
 
-        if self.image2:
-            webp_image = convert_image_to_webp(self.image2)
-            self.image2.save(webp_image.name, webp_image, save=False)
+    #     if self.image2:
+    #         webp_image2 = convert_image_to_webp(self.image2)
+    #         if webp_image2:
+    #             self.image2.save(webp_image2.name, webp_image2, save=False)
             
-        if self.image3:
-            webp_image = convert_image_to_webp(self.image3)
-            self.image3.save(webp_image.name, webp_image, save=False)
+    #     if self.image3:
+    #         webp_image3 = convert_image_to_webp(self.image3)
+    #         if webp_image3:
+    #             self.image3.save(webp_image3.name, webp_image3, save=False)
         
-        if self.image4:
-            webp_image = convert_image_to_webp(self.image4)
-            self.image4.save(webp_image.name, webp_image, save=False)
+    #     if self.image4:
+    #         webp_image4 = convert_image_to_webp(self.image4)
+    #         if webp_image4:
+    #             self.image4.save(webp_image4.name, webp_image4, save=False)
             
-        if self.image5:
-            webp_image = convert_image_to_webp(self.image5)
-            self.image5.save(webp_image.name, webp_image, save=False)
+    #     if self.image5:
+    #         webp_image5 = convert_image_to_webp(self.image5)
+    #         if webp_image5:
+    #             self.image5.save(webp_image5.name, webp_image5, save=False)
+    #     super().save(*args, **kwargs)
         
-        super().save(*args, **kwargs)
         
 
             

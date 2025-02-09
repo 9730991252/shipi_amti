@@ -27,4 +27,5 @@ urlpatterns = [
     path('ajax/', include('ajax.urls')),
     path('order/', include('order.urls')),
     path('sunil/', include('sunil.urls')),
+    path('hotel/', include('hotel.urls')),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

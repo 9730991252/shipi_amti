@@ -1,0 +1,16 @@
+<style>
+    .login{
+        display: none !important;;
+    }
+    .menu{
+        display: flex;
+        width: 100%;
+        overflow: scroll;
+        gap: 10px;
+    }
+</style>
+<div class="menu">
+    <a  href="/hotel/hotel_home/" class="my-1 {% if request.path == '/hotel/hotel_home/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Home</a>
+    <a  href="/hotel/hotel_item/" class="my-1 {% if request.path == '/hotel/hotel_item/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Item</a>
+    <a  href="/hotel/qr/" class="my-1 {% if request.path == '/hotel/hotel_home/' %}btn btn-warning{% else %}btn btn-primary{% endif %}">Qr Code</a>
+</div>

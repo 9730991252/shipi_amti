@@ -18,11 +18,9 @@ def item(request):
         if request.method == 'POST':
             name = request.POST.get('name')
             description = request.POST.get('description')
-            img = request.FILES.get('image')
             Item(
                 name=name,
                 description=description,
-                image1 = img,
                 ).save()
             return redirect('item')
         context = {
@@ -66,7 +64,11 @@ def category(request):
     else:
         return redirect('login')
     
-
+def compress_image(image):
+    im = Image.open(image)
+    im_io = io.BytesIO()
+    im.save(im_io, 'WEBP', quality=50)
+    return im_io
     
 @csrf_exempt
 def item_detail(request, id):
@@ -126,39 +128,57 @@ def item_detail(request, id):
             p.status = 1
             p.save()
             return redirect('item_detail', id=id )
-        if 'Edit_item'in request.POST:            
+        
+        if 'Edit_item_image1'in request.POST:            
             image1 = request.FILES.get('image1')
             
             if image1 == None:
                 pass
             else:
-                items.image1 = image1
-                
+                compressed_image1 = compress_image(image1)
+                items.image1.save(image1.name[:-5]+'.webp', compressed_image1, save=True)
+
+            return redirect('item_detail', id=id)
+        if 'Edit_item_image2'in request.POST:            
             image2 = request.FILES.get('image2')
             if image2 is None:
                 image2 = items.image2
             else:
-                items.image2 = image2
-                
+                compressed_image2 = compress_image(image2)
+                items.image2.save(image2.name[:-5]+'.webp', compressed_image2, save=True)
+
+            return redirect('item_detail', id=id)
+        
+        if 'Edit_item_image3'in request.POST:
             image3 = request.FILES.get('image3')
             if image3 is None:
                 image3 = items.image3
             else:
-                items.image3 = image3
-                
+                compressed_image3 = compress_image(image3)
+                items.image3.save(image3.name[:-5]+'.webp', compressed_image3, save=True)
+
+            return redirect('item_detail', id=id)
+        
+        if 'Edit_item_image4'in request.POST:
             image4 = request.FILES.get('image4')
             if image4 is None:
                 image4 = items.image4
             else:
-                items.image4 = image4
+                compressed_image4 = compress_image(image4)
+                items.image4.save(image4.name[:-5]+'.webp', compressed_image4, save=True)
+            return redirect('item_detail', id=id)
+        
+        if 'Edit_item_image5'in request.POST:
                 
             image5 = request.FILES.get('image5')
             if image5 is None:
                 image5 = items.image5
             else:
-                items.image5 = image5
-            items.save()
+                compressed_image5 = compress_image(image5)
+                items.image5.save(image5.name[:-5]+'.webp', compressed_image5, save=True)
+
             return redirect('item_detail', id=id)
+        
         if 'select_item_category'in request.POST:
             c_id = request.POST.get('id')
             category_item = Category_item.objects.filter(category_id=c_id,item_id=items.id).first()
