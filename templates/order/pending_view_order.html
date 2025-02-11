@@ -2,6 +2,7 @@
 {% block head %}
 {% endblock head %}
 {% block content %}
+{% load home_tag %}
 {% include 'include/owner_menu.html' %}
 {% include 'include/order_menu.html' %}
 
@@ -35,7 +36,8 @@
   
   
   </style>
-  
+  {% customer_details order_master.customer.id %}
+  <br>
   <div class="list_head">
   <strong>Iteam Name</strong>
   <strong>Price</strong>

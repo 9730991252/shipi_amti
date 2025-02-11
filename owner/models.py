@@ -31,7 +31,7 @@ class Price_and_weight(models.Model):
     sell_minimum_quantity = models.IntegerField(default=1)
     status = models.IntegerField(default=1)
     
-class Category_item(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True)
-    status = models.IntegerField(default=1)
+# class Category_item(models.Model):
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+#     item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True)
+#     status = models.IntegerField(default=1)

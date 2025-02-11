@@ -179,33 +179,33 @@ def item_detail(request, id):
 
             return redirect('item_detail', id=id)
         
-        if 'select_item_category'in request.POST:
-            c_id = request.POST.get('id')
-            category_item = Category_item.objects.filter(category_id=c_id,item_id=items.id).first()
-            if category_item:
-                if category_item.status==0:
-                    category_item.status = 1
-                    category_item.save()
-            else:
-                Category_item(
-                    category_id=c_id,
-                    item_id=items.id,
-                ).save()
-            return redirect('item_detail', id=id)
-        if 'unselect_category'in request.POST:
-            c_id = request.POST.get('id')
-            category_item = Category_item.objects.filter(category_id=c_id,item_id=items.id).first()
-            if category_item:
-                if category_item.status==1:
-                    category_item.status = 0
-                    category_item.save()
-            return redirect('item_detail', id=id)
-        category=[]
-        for c in Category.objects.filter(status=1):
-            if Category_item.objects.filter(category_id=c.id,item_id=items.id, status=1).exists():
-                category.append({'id': c.id,'name':c.name, 'selected_status': 1})
-            else:
-                category.append({'id': c.id,'name':c.name, 'selected_status': 0})
+        # if 'select_item_category'in request.POST:
+        #     c_id = request.POST.get('id')
+        #     category_item = Category_item.objects.filter(category_id=c_id,item_id=items.id).first()
+        #     if category_item:
+        #         if category_item.status==0:
+        #             category_item.status = 1
+        #             category_item.save()
+        #     else:
+        #         Category_item(
+        #             category_id=c_id,
+        #             item_id=items.id,
+        #         ).save()
+        #     return redirect('item_detail', id=id)
+        # if 'unselect_category'in request.POST:
+        #     c_id = request.POST.get('id')
+        #     category_item = Category_item.objects.filter(category_id=c_id,item_id=items.id).first()
+        #     if category_item:
+        #         if category_item.status==1:
+        #             category_item.status = 0
+        #             category_item.save()
+        #     return redirect('item_detail', id=id)
+        # category=[]
+        # for c in Category.objects.filter(status=1):
+        #     if Category_item.objects.filter(category_id=c.id,item_id=items.id, status=1).exists():
+        #         category.append({'id': c.id,'name':c.name, 'selected_status': 1})
+        #     else:
+        #         category.append({'id': c.id,'name':c.name, 'selected_status': 0})
         context = {
             'item': items,
             'prise_and_weight':Price_and_weight.objects.filter(item_id=id),

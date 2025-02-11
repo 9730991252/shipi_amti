@@ -4,6 +4,7 @@ from math import *
 import math
 from datetime import date
 from owner.models import *
+from customer.models import *
 
 register = template.Library()
 
@@ -18,3 +19,9 @@ def price_and_weight(item_id):
             'item_id':item_id,
             'price_and_weight':Price_and_weight.objects.filter(item_id=item_id, status=1)
         }
+        
+@register.inclusion_tag('inclusion_tag/home/customer_details.html')
+def customer_details(customer_id):
+    return{
+        'customer': Customer.objects.filter(id=customer_id).first()
+    }

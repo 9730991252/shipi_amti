@@ -4,6 +4,8 @@
 {% block content %}
 {% include 'include/owner_menu.html' %}
 {% include 'include/order_menu.html' %}
+{% load home_tag %}
+
 
 <style>
     *{margin: 0; padding: 0; 
@@ -36,6 +38,8 @@
   
   </style>
   
+  {% customer_details order_master.customer.id %}
+
 <div class="container">
 
   <div class="list_head">
