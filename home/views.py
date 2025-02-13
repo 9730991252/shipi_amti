@@ -5,8 +5,8 @@ from sunil.models import *
 from owner.models import *
 from order.models import *
 from customer.models import *
+from django.contrib import messages 
 # Create your models here.
-# Create your views here.
 
 def view_customer_order(request, order_filter):
     if request.session.has_key('customer_mobile'):
@@ -21,20 +21,17 @@ def view_customer_order(request, order_filter):
     }
     return render(request, 'home/view_customer_order.html', contaxt)
     
+def get_session_id(request):
+    return request.session.session_key
 
 def index(request):
     customer = ''
     customer_id = 0
     total_amount = 0
-    if request.session.has_key('customer_mobile'):
-        mobile = request.session['customer_mobile']
-        customer = Customer.objects.filter(mobile=mobile,status=1).first()
-        customer_id = customer.id if customer else 0
-        if customer == None:
-            customer = ''
-            del request.session['customer_mobile']
-        else:
-            total_amount = total_price(customer.id)
+        
+    session_id = get_session_id(request)
+    
+    total_amount = total_price(session_id)
             
                         
     contaxt={
@@ -42,25 +39,35 @@ def index(request):
         'item':Item.objects.filter(status=1),
         'customer':customer,
         'total_amount':total_amount,
-        'cart_qty':Cart.objects.filter(customer_id=customer_id).count(),
+        'cart_qty':Cart.objects.filter(session_id=session_id).count(),
         'i':Item.objects.all().first()
     }
     return render(request, 'home/index.html', contaxt)
 
 def order(request):
+    customer = ''
+    orderMaster = ''
     if request.session.has_key('customer_mobile'):
         mobile = request.session['customer_mobile']
         customer = Customer.objects.filter(mobile=mobile,status=1).first()
-    else:
-        return redirect('/')
+        orderMaster = OrderMaster.objects.filter(customer_id=customer.id).order_by('-id')
+    if 'mobile'in request.POST:
+        mobile = request.POST.get('mobile')
+        if mobile:
+            c = Customer.objects.filter(mobile=mobile,status=1).first()
+            if c:
+                request.session['customer_mobile'] = c.mobile
+            else:
+                messages.warning(request,"अद्याप तुमची एकही Order नाही")
+        return redirect('order')
     contaxt={
         'customer':customer,
-        'order_master':OrderMaster.objects.filter(customer_id=customer.id).order_by('-id'),
+        'order_master':orderMaster,
     }
     return render(request, 'home/order.html', contaxt)
 
-def total_price(customer_id):
-    cart = Cart.objects.filter(customer_id=customer_id)
+def total_price(session_id):
+    cart = Cart.objects.filter(session_id=session_id)
     total_amount = 0
     for c in cart:
         total_amount += int(c.qty) * int(c.price_and_weight.price)

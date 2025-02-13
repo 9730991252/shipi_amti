@@ -69,6 +69,12 @@
 
 
 
+<h6 class="mt-5 text-center"  >Delivery Address Information</h6>
+<div id="mob" style="display: flex;justify-content: center; gap: 10px;">
+  <input type="number" style="width: 200px;border: 1px solid black;" oninput="check_number()" id="mo" class="form-control" placeholder="Enter Mobile Number ">
+
+  <button style="display: none;" type="button" class="mt-2 btn btn-danger" id="submit_btn" onclick="check_customer()">Submit</button>
+</div>
 
 
 
@@ -76,90 +82,49 @@
 <style>
   input{
     border: 1px solid black !important;
-    background-color: rgb(223, 255, 221) !important;
   }
 </style>
-<h6 class="mt-5 text-center" >Delivery Address Information</h6>
 
-<div class="address_box">
-<form action="" method="POST">{% csrf_token %}
-  <div class="mb-3">
-    <label for="name" class="form-label">Full Name</label>
-    <input type="text" class="form-control" id="name" name="name" {% if customer.name == None %}{% else %} value="{{customer.name}}"{% endif %} required>
-  </div>
-
-  <div class="mb-3">
-    <label for="name" class="form-label">Pin Code</label>
-    <input type="number" class="form-control" id="name" name="pin_code" placeholder="6 Digit Pincode" {% if customer.pin_code == None %}{% else %} value="{{customer.pin_code}}"{% endif %} required>
-  </div>
-  
-  <div class="mb-3">
-    <label for="name" class="form-label">Flat, House no., Building, Company, Apartment </label>
-    <input type="text" class="form-control" id="name" name="house_no" {% if customer.house_no == None %}{% else %} value="{{customer.house_no}}"{% endif %} required>
-  </div>
+<div  id="address_box">
 
 
-  <div class="mb-3">
-    <label for="name" class="form-label">Area, Street, Sector, Village </label>
-    <input type="text" class="form-control" id="name" name="post" {% if customer.post == None %}{% else %} value="{{customer.post}}"{% endif %} required>
-  </div>
 
-  <div class="mb-3">
-    <label for="name" class="form-label">Landmark </label>
-    <input type="text" class="form-control" id="name" name="landmark" {% if customer.landmark == None %}{% else %} value="{{customer.landmark}}"{% endif %} required>
-  </div>
-
-  <div class="mb-3">
-    <label for="name" class="form-label">Taluka </label>
-    <input type="text" class="form-control" id="name" name="taluka" {% if customer.taluka == None %}{% else %} value="{{customer.taluka}}"{% endif %} required>
-  </div>
-
-  <div class="mb-3">
-    <label for="name" class="form-label">District </label>
-    <input type="text" class="form-control" id="name" name="district" {% if customer.district == None %}{% else %} value="{{customer.district}}"{% endif %} required>
-  </div>
-  <div class="mb-3">
-      <label for="name" class="form-label">State Name</label>
-      <input type="text" class="form-control" id="name" name="state_name" value="Maharashtra">
-  </div>
-  <button type="submit" name="Add_address" class="btn btn-warning">Place Order</button>
-</form>
 </div>
 
 </div>
 
 <script>
-  function state(s){
-    $.ajax({
-          url: "{% url 'state' %}",
-          method: "GET",
-          data:{
-            id:'{{customer.id}}',
-            s:s,
-          },
-          success: function(res){
-              location.reload()
-            
+function check_number(){
+    mobile=document.getElementById('mo').value;
+            if (mobile.length <= 9 ){
+            document.getElementById('mo').style.borderColor ='green';return false;
+            document.getElementById('submit_btn').style.display = 'none';
+        }
+        if (mobile.length >= 11 ){
+            alert('only 10 digit number ')
+            document.getElementById('mo').value='';
+            document.getElementById('submit_btn').style.display = 'none';
+        }
+        if (mobile.length == 10 ){
+                document.getElementById('submit_btn').style.display = 'unset';
+                
+                document.getElementById('mo').style.borderColor ='';return true;
+                
             }
-        })
-  }
-  function cart_qty(pid,cid){
-    qty = document.getElementById('qty'+pid).value;
+        }
+  function check_customer(){
+    mobile=document.getElementById('mo').value;
     $.ajax({
-          url: "{% url 'cart_qty' %}",
-          method: "GET",
-          data:{
-            cid:cid,
-            pid:pid,
-            qty:qty,
-          },
-          success: function(res){
-              location.reload()
-            }
-        })
+        url: "{% url 'check_customer' %}",
+        method: "GET",
+        data:{
+          mobile:mobile,
+        },
+        success: function(res){
+          document.getElementById('address_box').innerHTML = res.t;
+        }
+    });
   }
-
-
 </script>
 
 {% endblock content %}

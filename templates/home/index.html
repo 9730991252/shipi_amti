@@ -117,7 +117,7 @@
 
     <div><input type="text" class="form-control w-100" placeholder="Search Item"></div>
     <div> <b>Rs.</b><b id="total_amount">{{total_amount}}</b></div>
-    <div><a href="/order/cart/" id="place_order_btn" class="btn btn-warning btn-sm" {% if total_amount == 0 %} style="pointer-events: none;" {% endif %} > <i class="fa-solid fa-cart-shopping"></i> <b id="cart_qty" style="border-radius: 50%; padding: 2px;background-color: red;color: white;">{{cart_qty}}</b> </a></div>
+    <div><a href="/order/cart/" id="place_order_btn" class="btn btn-warning btn-sm"> <i class="fa-solid fa-cart-shopping"></i> <b id="cart_qty" style="border-radius: 50%; padding: 2px;background-color: red;color: white;">{{cart_qty}}</b> </a></div>
 
 </div>
 
@@ -165,7 +165,6 @@ function add_to_cart(item_id, prise_and_weight_id, customer_id) {
             document.getElementById('qty_box'+item_id).innerHTML = `<div class="mt-2 alert alert-success">This Item is added to Cart</div>`                    
             document.getElementById('place_order_btn').style.display = 'unset';
             document.getElementById('cart_qty').innerText = res.cart_qty;
-            location.reload()
         }
     });
 }
@@ -190,46 +189,13 @@ function check_number(id){
             }
         }
         
-new_prise_and_weight_id = ''
-last_id = ''
+last_prise_and_weight_id = ''
 function check_customer_sesion(p_id, prise_and_weight_id){
-    new_prise_and_weight_id = prise_and_weight_id
-    if ('{{customer}}' == ''){
-        document.getElementById('mob'+p_id).style.display = 'unset';
-        if (last_id){
-            if (last_id != p_id){
-                document.getElementById('mob'+last_id).style.display = 'none';
-            }
-        }
-        last_id = p_id;
-    }else{
-        $.ajax({
-            url: "{% url 'check_customer' %}",
-            method: "GET",
-            data:{
-                mobile:'{{customer.mobile}}',
-                prise_and_weight_id:prise_and_weight_id
-                },
-                success: function(res){
-
-                    document.getElementById('qty_box'+p_id).innerHTML = res.t                    
-                    if (last_qty_box_id){
-                        if (last_qty_box_id != p_id){
-                            document.getElementById('qty_box'+last_qty_box_id).innerHTML = ''
-                        }
-                    }
-                    last_qty_box_id= p_id                    
-                    if (last_price_and_weight_id){
-                        if (last_price_and_weight_id != prise_and_weight_id){
-                            document.getElementById('price_and_weight_btn'+last_price_and_weight_id).style.backgroundColor = 'transparent';
-                        }
-                    }
-                    document.getElementById('price_and_weight_btn'+prise_and_weight_id).style.backgroundColor = 'greenyellow';
-                    last_price_and_weight_id = prise_and_weight_id;
-                }
-
-        })
+    if (last_prise_and_weight_id){
+        document.getElementById('item_detail'+last_prise_and_weight_id).style.display = 'none';
     }
+    document.getElementById('item_detail'+prise_and_weight_id).style.display = 'unset';
+    last_prise_and_weight_id = prise_and_weight_id
 
 }
 
@@ -265,36 +231,5 @@ function minus(id, price, sell_minimum_quantity){
         speechSynthesis.speak(msg);
   }
 }
-function check_customer(id) {
-        var mobile=document.getElementById('mo'+id).value;
-        $.ajax({
-            url: "{% url 'check_customer' %}",
-            method: "GET",
-            data:{
-                mobile:mobile,
-                prise_and_weight_id:new_prise_and_weight_id
-            },
-                success: function(res){
-                    document.getElementById('mob'+last_id).style.display = 'none';
-                
-                    document.getElementById('qty_box'+id).innerHTML = res.t                    
-                    if (last_qty_box_id){
-                        if (last_qty_box_id != id){
-                            document.getElementById('qty_box'+last_qty_box_id).innerHTML = ''
-                        }
-                    }
-                    last_qty_box_id= id
-                    if (last_price_and_weight_id){
-                        if (last_price_and_weight_id != prise_and_weight_id){
-                            document.getElementById('price_and_weight_btn'+last_price_and_weight_id).style.backgroundColor = 'transparent';
-                        }
-                    }
-                    document.getElementById('price_and_weight_btn'+prise_and_weight_id).style.backgroundColor = 'greenyellow';
-                    last_price_and_weight_id = prise_and_weight_id;
-                    location.reload()
-                }
-
-        })
-    }
 </script>
 {% endblock content %}

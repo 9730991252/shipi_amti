@@ -16,7 +16,7 @@ def price_and_weight(item_id):
             'weight':p.weight,
             'price':p.price,
             'unit':p.unit,
-            'item_id':item_id,
+            'i':Item.objects.filter(id=item_id).first(),
             'price_and_weight':Price_and_weight.objects.filter(item_id=item_id, status=1)
         }
         

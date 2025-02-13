@@ -145,70 +145,68 @@ def order(request):
     else:
         return redirect('login')
 
+@csrf_exempt
 def cart(request):
-    customer = ''
+    session_id = get_session_id(request)
     cart = ''
     total_amount = 0
     total_amount_sub = 0
-
-    
-    if request.session.has_key('customer_mobile'):
-        mobile = request.session['customer_mobile']
-        customer = Customer.objects.filter(mobile=mobile,status=1).first()
-        if customer == None:
-            del request.session['customer_mobile']
-        else:
-            total_amount = total_price(customer.id)
-            cart = Cart.objects.filter(customer_id=customer.id)
-            if cart:
-                pass
-            else:
-                return redirect('/')
-            if 'Remove'in request.POST:
-                cart_id = request.POST.get('cart_id')
-                Cart.objects.filter(id=cart_id).delete()
-                return redirect('cart')
-            if 'Add_address'in request.POST:
-                name = request.POST.get('name')
-                pin_code = request.POST.get('pin_code')
-                house_no = request.POST.get('house_no')
-                post = request.POST.get('post')
-                landmark = request.POST.get('landmark')
-                taluka = request.POST.get('taluka')
-                district = request.POST.get('district')
-                state_name = request.POST.get('state_name')
-                customer.name = name
-                customer.pin_code = pin_code
-                customer.house_no = house_no
-                customer.post = post
-                customer.landmark = landmark
-                customer.taluka = taluka
-                customer.district = district
-                customer.state_name = state_name
-                customer.save()
-                order_filter = int(OrderMaster.objects.all().count()) +1
-                OrderMaster(
-                    customer_id=customer.id,
-                    total_amount=total_amount,
-                    order_filter=order_filter,
-                ).save()
-                for c in cart:
-                    Order_detail(
-                        customer_id=c.customer.id,
-                        item_id=c.item.id,
-                        price=c.price_and_weight.price,
-                        weight=c.price_and_weight.weight,
-                        unit=c.price_and_weight.unit,
-                        qty=c.qty,
-                        order_filter=order_filter,
-                    ).save()
-                Cart.objects.filter(customer_id=customer.id).delete()
-                return redirect('/')
-            # for c in cart:
-                
+    total_amount = total_price(session_id)
+    cart = Cart.objects.filter(session_id=session_id)
+    if cart:
+        pass
+    else:
+        return redirect('/')
+    if 'Remove'in request.POST:
+        cart_id = request.POST.get('cart_id')
+        Cart.objects.filter(id=cart_id).delete()
+        return redirect('cart')
+    if 'Add_address'in request.POST:
+        name = request.POST.get('name')
+        mobile = request.POST.get('mobile')
+        
+        request.session.flush()
+        request.session['customer_mobile'] = mobile
+        
+        pin_code = request.POST.get('pin_code')
+        house_no = request.POST.get('house_no')
+        post = request.POST.get('post')
+        landmark = request.POST.get('landmark')
+        taluka = request.POST.get('taluka')
+        district = request.POST.get('district')
+        state_name = request.POST.get('state_name')
+        customer = Customer.objects.filter(mobile=mobile).first()
+        customer.name = name
+        customer.pin_code = pin_code
+        customer.house_no = house_no
+        customer.post = post
+        customer.landmark = landmark
+        customer.taluka = taluka
+        customer.district = district
+        customer.state_name = state_name
+        customer.save()
+        order_filter = int(OrderMaster.objects.all().count()) +1
+        
+        OrderMaster(
+            customer_id=customer.id,
+            total_amount=total_amount,
+            order_filter=order_filter,
+        ).save()
+        for c in cart:
+            Order_detail(
+                customer_id=customer.id,
+                item_id=c.item.id,
+                price=c.price_and_weight.price,
+                weight=c.price_and_weight.weight,
+                unit=c.price_and_weight.unit,
+                qty=c.qty,
+                order_filter=order_filter,
+            ).save()
+        Cart.objects.filter(session_id=session_id).delete()
+        return redirect('/')
+        
     contaxt={
         'cart':cart,
-        'customer': customer,
         'total_amount_sub':total_amount
     }
     return render(request, 'order/cart.html', contaxt)

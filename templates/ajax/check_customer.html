@@ -1,15 +1,46 @@
-<div id="item_detail{{i.id}}"  {% if n.qty == 0 %} style="display: none;"{% endif %}>
-    <div class=" my-4 text-center" style="display: grid;grid-template-columns: 3fr 2fr;">
-      <div style="display: grid;grid-template-columns: 1fr 2fr 1fr;gap: 0px;">
-        <div class=" "><button type="button" onclick="minus('{{i.id}}','{{prisce_and_weight.price}}','{{prisce_and_weight.sell_minimum_quantity}}')" class="btn btn-success px-3">-</button></div>
-        <div class="">
-            <input type="text" name="qty" style="width: 60px; text-align: center;" id="qty{{i.id}}" value="{{prisce_and_weight.sell_minimum_quantity}}" >{{prisce_and_weight.unit}}
-        </div>
-        <div class=""><button type="button" onclick="plus('{{i.id}}','{{prisce_and_weight.price}}')" class="btn btn-success px-3">+</button></div>
-      </div>
-      <div class=""> <button type="submit" class="btn btn-danger" onclick="add_to_cart('{{i.id}}','{{prisce_and_weight.id}}', '{{customer.id}}')">Add To Cart</button> </div>
+<br>
+<div class="address_box">
+<form action="" method="POST">{% csrf_token %}
+    <input type="hidden" name="mobile" {% if customer.mobile == None %}{% else %} value="{{customer.mobile}}"{% endif %}>
+    <div class="mb-3">
+      <label for="name" class="form-label">Full Name</label>
+      <input type="text" class="form-control" id="name" name="name" {% if customer.name == None %}{% else %} value="{{customer.name}}"{% endif %} required>
     </div>
-    <div class="text-center">
-        <b>Rs. </b><b id="total_amount{{i.id}}">{{prisce_and_weight.price}}</b>
+  
+    <div class="mb-3">
+      <label for="name" class="form-label">Pin Code</label>
+      <input type="number" class="form-control" id="name" name="pin_code" placeholder="6 Digit Pincode" {% if customer.pin_code == None %}{% else %} value="{{customer.pin_code}}"{% endif %} required>
     </div>
-  </div>
+    
+    <div class="mb-3">
+      <label for="name" class="form-label">Flat, House no., Building, Company, Apartment </label>
+      <input type="text" class="form-control" id="name" name="house_no" {% if customer.house_no == None %}{% else %} value="{{customer.house_no}}"{% endif %} required>
+    </div>
+  
+  
+    <div class="mb-3">
+      <label for="name" class="form-label">Area, Street, Sector, Village </label>
+      <input type="text" class="form-control" id="name" name="post" {% if customer.post == None %}{% else %} value="{{customer.post}}"{% endif %} required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="name" class="form-label">Landmark </label>
+      <input type="text" class="form-control" id="name" name="landmark" {% if customer.landmark == None %}{% else %} value="{{customer.landmark}}"{% endif %} required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="name" class="form-label">Taluka </label>
+      <input type="text" class="form-control" id="name" name="taluka" {% if customer.taluka == None %}{% else %} value="{{customer.taluka}}"{% endif %} required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="name" class="form-label">District </label>
+      <input type="text" class="form-control" id="name" name="district" {% if customer.district == None %}{% else %} value="{{customer.district}}"{% endif %} required>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">State Name</label>
+        <input type="text" class="form-control" id="name" name="state_name" value="Maharashtra">
+    </div>
+    <button type="submit" name="Add_address" class="btn btn-warning">Place Order</button>
+  </form>
+</div>

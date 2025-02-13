@@ -19,6 +19,7 @@
     }
 
 </style>
+{% if customer %}
 
 <div class="container">
 {% for o in order_master %}
@@ -48,4 +49,18 @@
 </a>
 {% endfor %}
 </div>
+{% else %}
+{% include 'include/alert.html' %}
+
+<div class="container text-center mt-3">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <input type="number" class="form-control" name="mobile" placeholder="Enter Mobile" required>
+    </div>
+    <button type="submit" name="mobile" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% endif %}
 {% endblock content %}
