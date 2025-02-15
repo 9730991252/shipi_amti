@@ -8,6 +8,9 @@ class Cart(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True)
     price_and_weight = models.ForeignKey(Price_and_weight, on_delete=models.CASCADE, null=True)
     qty = models.IntegerField()
+    date = models.DateField(auto_now_add=True, null=True)
+    
+    
     
 STATUS_CHOICES = (
   ('Accepted','Accepted'),

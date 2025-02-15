@@ -203,7 +203,7 @@ def cart(request):
                 order_filter=order_filter,
             ).save()
         Cart.objects.filter(session_id=session_id).delete()
-        return redirect('/')
+        return redirect(f'/view_customer_order/{order_filter}')
         
     contaxt={
         'cart':cart,

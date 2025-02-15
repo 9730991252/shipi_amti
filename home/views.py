@@ -5,7 +5,8 @@ from sunil.models import *
 from owner.models import *
 from order.models import *
 from customer.models import *
-from django.contrib import messages 
+from django.contrib import messages
+from datetime import date
 # Create your models here.
 
 def view_customer_order(request, order_filter):
@@ -32,6 +33,13 @@ def index(request):
     session_id = get_session_id(request)
     
     total_amount = total_price(session_id)
+                
+    c = Cart.objects.all()
+    for c in c:
+        if c.date != date.today():
+            c.delete()
+        else:
+            print('no')
             
                         
     contaxt={
@@ -51,15 +59,16 @@ def order(request):
         mobile = request.session['customer_mobile']
         customer = Customer.objects.filter(mobile=mobile,status=1).first()
         orderMaster = OrderMaster.objects.filter(customer_id=customer.id).order_by('-id')
-    if 'mobile'in request.POST:
+    if 'check_mobile'in request.POST:
         mobile = request.POST.get('mobile')
         if mobile:
             c = Customer.objects.filter(mobile=mobile,status=1).first()
             if c:
                 request.session['customer_mobile'] = c.mobile
+                print('Customer')
             else:
                 messages.warning(request,"अद्याप तुमची एकही Order नाही")
-        return redirect('order')
+        return redirect('/order/')
     contaxt={
         'customer':customer,
         'order_master':orderMaster,
