@@ -149,7 +149,7 @@ function read_less(id){
 last_price_and_weight_id = ''
 last_qty_box_id = ''
 
-function add_to_cart(item_id, prise_and_weight_id, customer_id) {
+function add_to_cart(item_id, prise_and_weight_id) {
     qty = document.getElementById('qty'+item_id).value
     $.ajax({
         url: "{% url 'add_to_cart' %}",
@@ -158,7 +158,6 @@ function add_to_cart(item_id, prise_and_weight_id, customer_id) {
             item_id:item_id,
             qty:qty,
             prise_and_weight_id:prise_and_weight_id,
-            customer_id:customer_id
         },
         success: function(res){
             document.getElementById('total_amount').innerText = res.total_amount
@@ -193,8 +192,10 @@ last_prise_and_weight_id = ''
 function check_customer_sesion(p_id, prise_and_weight_id){
     if (last_prise_and_weight_id){
         document.getElementById('item_detail'+last_prise_and_weight_id).style.display = 'none';
+        document.getElementById('price_and_weight_btn'+last_prise_and_weight_id).style.backgroundColor = '#FFFFFF';
     }
     document.getElementById('item_detail'+prise_and_weight_id).style.display = 'unset';
+    document.getElementById('price_and_weight_btn'+prise_and_weight_id).style.backgroundColor = '#FFC107';
     last_prise_and_weight_id = prise_and_weight_id
 
 }

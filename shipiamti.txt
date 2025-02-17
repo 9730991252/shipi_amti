@@ -12,8 +12,8 @@ exit
 root
 cd shipi_amti
 git pull
- systemctl daemon-reload
- systemctl restart shipi_amti.com.gunicorn
+systemctl daemon-reload
+systemctl restart shipi_amti.com.gunicorn
 exit
 
 git clone https://github.com/9730991252/shipi_amti.git
@@ -105,26 +105,26 @@ ExecStart=/root/shipi_amti/venv/bin/gunicorn \
 WantedBy=multi-user.target
 
 ----------------------------------------------------------------
- systemctl start shipi_amti.com.gunicorn.socket
+systemctl start shipi_amti.com.gunicorn.socket
 
- systemctl start shipi_amti.com.gunicorn.service
+systemctl start shipi_amti.com.gunicorn.service
 
 -----------------------------------------------------------------
 
- systemctl enable shipi_amti.com.gunicorn.socket
+systemctl enable shipi_amti.com.gunicorn.socket
 
- systemctl enable shipi_amti.com.gunicorn.service
+systemctl enable shipi_amti.com.gunicorn.service
 
 -----------------------------------------------------------------------
 
- systemctl status shipi_amti.com.gunicorn.socket
+systemctl status shipi_amti.com.gunicorn.socket
 
- systemctl status shipi_amti.com.gunicorn.service
+systemctl status shipi_amti.com.gunicorn.service
 
 -------------------------------------------
 
- systemctl daemon-reload
- systemctl restart shipi_amti.com.gunicorn
+systemctl daemon-reload
+systemctl restart shipi_amti.com.gunicorn
 
 --------------------------------
 
@@ -181,8 +181,8 @@ server{
 
 ********** restart ******
 
- systemctl daemon-reload
- systemctl restart shipi_amti.com.gunicorn
+systemctl daemon-reload
+systemctl restart shipi_amti.com.gunicorn
 
 --------------------------------------- ssl ------------------
 

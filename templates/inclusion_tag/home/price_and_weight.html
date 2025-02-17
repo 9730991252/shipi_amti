@@ -1,43 +1,44 @@
 <hr>
 <div div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
     {% for p in price_and_weight %}
-        <div id="price_and_weight_btn{{p.id}}" onclick="check_customer_sesion('{{item_id}}','{{p.id}}')" style=" cursor: pointer;padding: 10px;border: 1px solid rgb(102, 102, 102);border-radius: 10px;">
-            <div style="display: flex; justify-content: space-between;flex-direction: column;">
-                <div><b>{{p.weight}}{{p.unit}}</b></div>
-                <div id="price{{p.item_id}}">Rs.{{p.price}}</div>
-            </div>
-        </div>
-
-        <div id="item_detail{{p.id}}"  style="display: none;">
-            <div class=" my-4 text-center" style="display: grid;grid-template-columns: 3fr 2fr;">
-              <div style="display: grid;grid-template-columns: 1fr 2fr 1fr;gap: 0px;">
-                <div class=" "><button type="button" onclick="minus('{{i.id}}','{{p.price}}','{{p.sell_minimum_quantity}}')" class="btn btn-success px-3">-</button></div>
-                <div class="">
-                    <input type="text" name="qty" style="width: 60px; text-align: center;" id="qty{{i.id}}" value="{{p.sell_minimum_quantity}}" >{{p.unit}}
-                </div>
-                <div class=""><button type="button" onclick="plus('{{i.id}}','{{p.price}}')" class="btn btn-success px-3">+</button></div>
-              </div>
-              <div class=""> <button type="submit" class="btn btn-danger" onclick="add_to_cart('{{i.id}}','{{p.id}}')">Add To Cart</button> </div>
-            </div>
-            <div class="text-center">
-                <b>Rs. </b><b id="total_amount{{i.id}}">{{p.price}}</b>
-            </div>
-          </div>
-          <script>
-            document.getElementById('total_amount{{i.id}}').innerText = (Number('{{p.price}}') * Number('{{p.sell_minimum_quantity}}'))
-          </script>
+    <div id="price_and_weight_btn{{p.id}}" onclick="check_customer_sesion('{{item_id}}','{{p.id}}')" style=" cursor: pointer;padding: 10px;border: 1px solid rgb(102, 102, 102);border-radius: 10px;">
+      <div style="display: flex; justify-content: space-between;flex-direction: column;">
+        <div><b>{{p.weight}}{{p.unit}}</b></div>
+        <div id="price{{p.item_id}}">Rs.{{p.price}}</div>
+      </div>
+    </div>
     {% endfor %}
-
+    
+    {% for p in price_and_weight %}
+    <div id="item_detail{{p.id}}"  style="display: none;">
+      <div class=" my-4 text-center" style="display: grid;grid-template-columns: 3fr 2fr;">
+        <div style="display: grid;grid-template-columns: 1fr 2fr 1fr;gap: 0px;">
+          <div class=" "><button type="button" onclick="minus('{{p.id}}','{{p.price}}','{{p.sell_minimum_quantity}}')" class="btn btn-success px-3">-</button></div>
+          <div class="">
+            <input type="text" name="qty" style="width: 60px; text-align: center;" id="qty{{p.id}}" value="{{p.sell_minimum_quantity}}" >{{p.unit}}
+          </div>
+          <div class=""><button type="button" onclick="plus('{{p.id}}','{{p.price}}')" class="btn btn-success px-3">+</button></div>
+        </div>
+        <div class=""> <button type="submit" class="btn btn-danger" onclick="add_to_cart('{{i.id}}','{{p.id}}')">Add To Cart</button> </div>
+      </div>
+      <div class="text-center">
+        <b>Rs. </b><b id="total_amount{{p.id}}">{{p.price}}</b>
+      </div>
+    </div>
+    <script>
+      document.getElementById('total_amount{{p.id}}').innerText = (Number('{{p.price}}') * Number('{{p.sell_minimum_quantity}}'))
+      </script>
+  {% endfor %}
 </div>
 
 
-<!-- <div id="item_detail{{i.id}}"  {% if n.qty == 0 %} style="display: none;"{% endif %}>
+<!-- <div id="item_detail{{p.id}}"  {% if n.qty == 0 %} style="display: none;"{% endif %}>
     <div class=" my-4 text-center" style="display: grid;grid-template-columns: 1fr 2fr 1fr;">
-      <div class=" "><button type="button" onclick="minus('{{i.id}}','{{i.price}}')" class="btn btn-success px-3">-</button></div>
+      <div class=" "><button type="button" onclick="minus('{{p.id}}','{{p.price}}')" class="btn btn-success px-3">-</button></div>
       <div class="">
-          <input type="text" name="qty" style="width: 60px; text-align: center;" id="qty{{i.id}}" value="{% if n.qty != 0 %}{{n.qty}}{% else %}1{% endif %}" oninput="oninput_add_to_cart('{{i.id}}','{{i.price}}')" >
+          <input type="text" name="qty" style="width: 60px; text-align: center;" id="qty{{p.id}}" value="{% if n.qty != 0 %}{{n.qty}}{% else %}1{% endif %}" oninput="oninput_add_to_cart('{{p.id}}','{{p.price}}')" >
       </div>
-      <div class=""><button type="button" onclick="plus('{{i.id}}','{{i.price}}')" class="btn btn-success px-3">+</button></div>
+      <div class=""><button type="button" onclick="plus('{{p.id}}','{{p.price}}')" class="btn btn-success px-3">+</button></div>
     </div>
   </div> -->
 

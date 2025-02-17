@@ -9,7 +9,6 @@ def add_to_cart(request):
         request.session.create()
     if request.method == 'GET':
         item_id = request.GET['item_id']
-        # print('item_id:', item_id)
         qty = request.GET['qty']
         prise_and_weight_id = request.GET['prise_and_weight_id']
         session_id = get_session_id(request)
