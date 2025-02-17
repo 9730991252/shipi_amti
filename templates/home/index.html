@@ -150,7 +150,7 @@ last_price_and_weight_id = ''
 last_qty_box_id = ''
 
 function add_to_cart(item_id, prise_and_weight_id) {
-    qty = document.getElementById('qty'+item_id).value
+    qty = document.getElementById('qty'+prise_and_weight_id).value
     $.ajax({
         url: "{% url 'add_to_cart' %}",
         method: "GET",
