@@ -2,6 +2,16 @@
 root
 cd shipi_amti
 git pull
+source venv/bin/activate
+python3 manage.py makemigrations
+python3 manage.py migrate
+systemctl daemon-reload
+systemctl restart shipi_amti.com.gunicorn
+exit
+
+root
+cd shipi_amti
+git pull
  systemctl daemon-reload
  systemctl restart shipi_amti.com.gunicorn
 exit

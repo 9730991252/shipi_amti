@@ -23,6 +23,9 @@
                 <b>Rs. </b><b id="total_amount{{i.id}}">{{p.price}}</b>
             </div>
           </div>
+          <script>
+            document.getElementById('total_amount{{i.id}}').innerText = (Number('{{p.price}}') * Number('{{p.sell_minimum_quantity}}'))
+          </script>
     {% endfor %}
 
 </div>
