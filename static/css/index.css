@@ -88,7 +88,7 @@
 @media only screen and (max-width: 450px) {
     .hero {
         background-size: contain !important;
-        height: 30vh !important;
+        height: 50vh !important;
     }
     .item_main_box{
 

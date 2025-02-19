@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 <style>
 .hero {
-    background: url('{% static "img/full_add.jpg" %}') no-repeat center top;
+    background: url('{% static "img/add.jpg" %}') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -23,9 +23,18 @@
     left: 0;
     right: 0;
     z-index: +1;
+
+}
+@media only screen and (max-width: 450px) {
+    .hero {
+    background: url('{% static "img/add.jpg" %}') no-repeat center top;
+    background-position: 0px 60px;
+
+        height: 30vh !important;
+    }
 }
 </style>
-<section class="hero" data-aos="fade-right" data-aos-duration="2000">
+<section class="hero">
     <br><br><br>
 </section>
 
@@ -149,7 +158,6 @@
 
 <!----------------------------------------------------------------------------->
 <script>
-    ScrollReveal().reveal('.container', { delay: 375, reset: true });
     see_video_last_id = ''
 function see_video(id){
     if(see_video_last_id == id){
