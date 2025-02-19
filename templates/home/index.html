@@ -14,10 +14,17 @@
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 <style>
 .hero {
-    background: url('{% static "img/logo.jpg" %}') no-repeat center center;
-    }
+    background: url('{% static "img/full_add.jpg" %}') no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.navbar{
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: +1;
+}
 </style>
-<br>
 <section class="hero" data-aos="fade-right" data-aos-duration="2000">
     <br><br><br>
 </section>

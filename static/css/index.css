@@ -73,19 +73,23 @@
 
 /* Hero Section with Image */
 .hero {
-    background: url('{% static "img/logo.jpg" %}') no-repeat center center;
     background-size: cover;
-    height: 50vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: #ffffff;
+    background-attachment: fixed;
 }
 
 
 
 @media only screen and (max-width: 450px) {
+    .hero {
+        background-size: contain !important;
+        height: 30vh !important;
+    }
     .item_main_box{
 
         justify-content: center;
