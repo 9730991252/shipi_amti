@@ -12,6 +12,16 @@
 {% load home_tag %}
 {% load embed_video_tags %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
+<style>
+.hero {
+    background: url('{% static "img/logo.jpg" %}') no-repeat center center;
+    }
+</style>
+<br>
+<section class="hero" data-aos="fade-right" data-aos-duration="2000">
+    <br><br><br>
+</section>
+
 <div class="container body">
 
 
@@ -24,7 +34,7 @@
 
 </div>
 
-<br>
+
 
 <div class="item_main_box">
     {% for i in item %}
