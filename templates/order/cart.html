@@ -105,8 +105,7 @@
 <script>
 function check_number(){
     mobile=document.getElementById('mo').value;
-            if (mobile.length <= 9 ){
-            document.getElementById('mo').style.borderColor ='green';return false;
+        if (mobile.length <= 9 ){
             document.getElementById('submit_btn').style.display = 'none';
         }
         if (mobile.length >= 11 ){
@@ -116,9 +115,6 @@ function check_number(){
         }
         if (mobile.length == 10 ){
                 document.getElementById('submit_btn').style.display = 'unset';
-                
-                document.getElementById('mo').style.borderColor ='';return true;
-                
             }
         }
   function check_customer(){

@@ -33,7 +33,7 @@ def check_customer(request):
             Customer(
                 mobile=mobile,
                 status=1,
-            )
+            ).save()
         c = Customer.objects.filter(mobile=mobile).first()
     context={
         'customer':c
