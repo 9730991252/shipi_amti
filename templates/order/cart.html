@@ -72,8 +72,10 @@
 <h6 class="mt-5 text-center"  >Delivery Address Information</h6>
 <div id="mob" style="display: flex;justify-content: center; gap: 10px;">
   <input type="number" style="width: 200px;border: 1px solid black;" oninput="check_number()" id="mo" class="form-control" placeholder="Enter Mobile Number ">
+  <input type="number" style="width: 200px;border: 1px solid black;display: none;" id="read_only_mo" class="form-control" placeholder="Enter Mobile Number " readonly>
 
-  <button style="display: none;" type="button" class="mt-2 btn btn-danger" id="submit_btn" onclick="check_customer()">Submit</button>
+  <button style="display: none;" type="button" class="mt-2 btn btn-danger" id="submit_btn" onclick="check_customer(),cut_btn.style.display = 'unset',this.style.display = 'none'">Submit</button>
+  <button style="display: none;" type="button" class="mt-2 btn btn-danger" id="cut_btn" onclick="location.reload()">X</button>
 </div>
 
 
@@ -114,6 +116,9 @@ function check_number(){
         }
   function check_customer(){
     mobile=document.getElementById('mo').value;
+    document.getElementById('read_only_mo').value = mobile;
+    document.getElementById('read_only_mo').style.display = 'unset';
+    document.getElementById('mo').style.display = 'none';
     $.ajax({
         url: "{% url 'check_customer' %}",
         method: "GET",
