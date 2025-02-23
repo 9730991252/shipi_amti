@@ -37,7 +37,12 @@
 </style>
 
 
+
 <div class="container">
+<div style="display: flex;justify-content: space-evenly;" class="">
+  <b>Bill Number {{order_master.order_filter}}</b>
+  <p>Date {{order_master.date}}</p>
+</div>
 <div class="list_head">
 <strong>Iteam Name</strong>
 <strong>Price</strong>
@@ -61,17 +66,19 @@ document.getElementById('t{{p.id}}').innerHTML = Number('{{p.qty}}') * Number('{
 
 {% if order_master.status == 'Pending' %}
 <div class="text-center" style="display: grid;justify-content: center;grid-template-columns: repeat(auto-fit, 250px);">
-    <div style="color: red;">{{order_master.status}}</div>
-    <div class="bg-danger" style="position: relative;">
+    <div >{{order_master.status}}</div>
+    <div style="position: relative;">
         <img class="qr_img" src="{% static 'img/qr.jpeg' %}" >
         <div style="position: absolute; bottom:50px; right: 5px;">
             <b>vikas shiraskar Mo.9730268423</b>
         </div>
+        <a href="upi://pay?pa=9730991252@ybl" class="btn btn-success">pay</a>
+
     </div>
 </div>
 {% endif %}
 
 </div>
 
-
+<br><br>
 {% endblock content %}
