@@ -1,9 +1,9 @@
 .body{
     width: 95%;
-
-
 }
-
+body{
+    background-color: rgba(252, 223, 229, 0.548) !important;
+}
 *{
     user-select: none;
 }
@@ -42,12 +42,12 @@
     grid-template-columns: repeat(auto-fit, 300px);
     justify-content: start;
     gap: 20px;
+    
 }
 .item_box{
-    background-color: rgb(255, 255, 255) !important;;
-    border: 1px solid black !important;
-    border-radius: 10px;
+    box-shadow: -6px 0px 35px -3px rgba(163,163,163,1);    border-radius: 10px;
     text-align: center;
+    background-color: rgb(255, 255, 255) !important;
 
 }
 
