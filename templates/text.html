@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  </head>
+  <body>
+    <div id="qrCodeContainer">
+      <canvas id="qrCode"></canvas>
+    </div>
+    <script>
+        const qrCodeElement = document.getElementById('qrCode');
+        qrCodeElement.getContext('2d').clearRect(0, 0, qrCodeElement.width, qrCodeElement.height);
+
+        const qr = new QRious({
+          element: qrCodeElement,
+          value: `upi://pay?pa=9730991252@ybl&pn=SUNIK KALE&am=10&cu=INR`,
+          size: 200,
+        });
+    </script>
+  </body>
 </html>
