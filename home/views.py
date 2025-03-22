@@ -13,6 +13,30 @@ def view_customer_order(request, order_filter):
     if request.session.has_key('customer_mobile'):
         mobile = request.session['customer_mobile']
         customer = Customer.objects.filter(mobile=mobile,status=1).first()
+        if 'add_reviev'in request.POST:
+            i_id = request.POST.get('id')
+            ratings = request.POST.get('ratings')
+            title = request.POST.get('title')
+            contant = request.POST.get('contant')
+            r = rattings.objects.filter(item_id=i_id,customer_id=customer.id).first()
+            if r:
+                r.item_id = i_id
+                r.customer_id = customer.id
+                r.reviev_title = title
+                r.reviev_description = contant
+                r.star = ratings
+                r.save()
+            else:
+                rattings(
+                    item_id = i_id,
+                    customer_id = customer.id,
+                    reviev_title = title,
+                    reviev_description = contant,
+                    star = ratings,
+                ).save()
+            messages.success(request,"आपली रेव्ह्यू सबमिट केली गेली आहे")
+            return redirect(f'/view_customer_order/{order_filter}')
+
     else:
         return redirect('/')
     contaxt={
@@ -40,11 +64,44 @@ def index(request):
             c.delete()
         else:
             print('no')
+    it = []
+    for i in Item.objects.filter(status=1):
+        r = rattings.objects.filter(item_id=i.id)
+        avrage_r = r.aggregate(Avg('star'))
+                
+        total_r = r.count() 
+        
+        avg = avrage_r['star__avg'] if avrage_r['star__avg'] else 0
+        
+        it.append({
+            'id':i.id,
+            'name':i.name,
+            'description':i.description,
+            'youtube_url':i.youtube_url,
+            'image1':i.image1,
+            'image2':i.image2,
+            'image3':i.image3,
+            'image4':i.image4,
+            'image5':i.image5,
+            'status':i.status,
             
+            
+            'average_ratings': avg if avg is not 0 else '',
+            'total_r':total_r if total_r is not 0 else '',
+            
+            'all_r':rattings.objects.filter(item_id=i.id),
+            
+            '1_star_per':round(float(r.filter(item_id=i.id, star=1).count())*(100/total_r)) if total_r != 0 else 0,
+            '2_star_per':round(float(r.filter(item_id=i.id, star=2).count())*(100/total_r)) if total_r != 0 else 0,
+            '3_star_per':round(float(r.filter(item_id=i.id, star=3).count())*(100/total_r)) if total_r != 0 else 0,
+            '4_star_per':round(float(r.filter(item_id=i.id, star=4).count())*(100/total_r)) if total_r != 0 else 0,
+            '5_star_per':round(float(r.filter(item_id=i.id, star=5).count())*(100/total_r)) if total_r != 0 else 0,
+            
+        })
                         
     contaxt={
         'category': Category.objects.filter(status=1),
-        'item':Item.objects.filter(status=1),
+        'item':it,
         'customer':customer,
         'total_amount':total_amount,
         'cart_qty':Cart.objects.filter(session_id=session_id).count(),

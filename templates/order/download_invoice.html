@@ -142,7 +142,13 @@ html2canvas(screenshotTarget).then((canvas) => {
     anchor.setAttribute("download", '{{order_master.customer.name}} '+ new Date().toLocaleString() +' .jpeg');
     anchor.click();
     
-    window.location.href = "{% url 'pending_view_order' order_filter=order_master.order_filter %}"
+    
+    if (Number('{{redirect_s}}') == 0){
+        window.location.href = "{% url 'view_customer_order' order_master.order_filter %}";
+    }
+    else{
+        window.location.href = "{% url 'pending_view_order' order_filter=order_master.order_filter %}"
+    }
 
 })
 

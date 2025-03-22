@@ -27,12 +27,8 @@ share/python-wheels/
 MANIFEST
 
 item_images/
-owner.migrations/
-home.migrations/
-order.migrations/
-customer.migrations/
-sunil.migrations/
-hotel.migrations/
+migrations/
+
 
 
 # PyInstaller

@@ -48,18 +48,17 @@ def accepted(request):
 @csrf_exempt
 def download_invoice(request, order_filter):
     if request.session.has_key('owner_mobile'):
-        mobile = request.session['owner_mobile']
-        e = Employee.objects.filter(mobile=mobile).first()
-
-        
-        context={
-            'employee':e,
-            'order_master':OrderMaster.objects.filter(order_filter=order_filter).first(),
-            'order_details':Order_detail.objects.filter(order_filter=order_filter),
-        } 
-        return render(request, 'order/download_invoice.html',context)
+        redirect_s = 1
     else:
-        return redirect('login')
+        redirect_s = 0
+        
+    context={
+        # 'employee':e,
+        'order_master':OrderMaster.objects.filter(order_filter=order_filter).first(),
+        'order_details':Order_detail.objects.filter(order_filter=order_filter),
+        'redirect_s':redirect_s
+    } 
+    return render(request, 'order/download_invoice.html',context)
     
 @csrf_exempt
 def delivered_view_order(request, order_filter):
