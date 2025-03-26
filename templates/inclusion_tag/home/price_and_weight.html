@@ -1,10 +1,11 @@
 <hr>
 <div div style="display: flex; justify-content: space-evenly; flex-wrap: wrap;">
     {% for p in price_and_weight %}
-    <div id="price_and_weight_btn{{p.id}}" onclick="check_customer_sesion('{{item_id}}','{{p.id}}')" style=" cursor: pointer;padding: 10px;border: 1px solid rgb(102, 102, 102);border-radius: 10px;">
+    <div id="price_and_weight_btn{{p.id}}" onclick="check_customer_sesion('{{item_id}}','{{p.id}}')" style=" cursor: pointer;padding: 10px;border: 1px solid rgb(102, 102, 102);background-color: rgb(221, 253, 242); border-radius: 10px;">
       <div style="display: flex; justify-content: space-between;flex-direction: column;">
         <div><b>{{p.weight}}{{p.unit}}</b></div>
         <div id="price{{p.item_id}}">Rs.{{p.price}}</div>
+        <p style="margin-bottom: -5px;">Book Now</p>
       </div>
     </div>
     {% endfor %}
