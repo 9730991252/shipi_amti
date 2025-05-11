@@ -1,4 +1,7 @@
 103.150.136.82
+
+Test 123
+
 root
 cd shipi_amti
 git pull
