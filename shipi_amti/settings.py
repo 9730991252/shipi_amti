@@ -41,13 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    'owner',
-    'ajax',
-    'customer',
-    'order',
-    'sunil',
-    'embed_video',
-    'hotel',
 ]
 
 MIDDLEWARE = [

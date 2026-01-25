@@ -1,30 +1,185 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand " style="display: flex; align-items: center; gap: 10px;"  href="/">
-            <img src="{% static 'img/logo.jpg' %}"  width="30" style="border-radius: 50%;" height="30" class="d-inline-block align-text-top">
-            <div><b style="color: orange;">शिपी </b> <b> आमटी</b></div>
-          </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link order text-danger" href="/order/">Your Orders</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link login" href="/login/">Login</a>
-          </li>
-          {% if customer %}
-            <li class="nav-item">
-              <a class="nav-link login" href="/logout/">Logout</a>
-            </li>
-          {% endif %}
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI",Arial,sans-serif}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#ffffff;
+    border-bottom:1px solid #eaeaea;
+}
+
+/* FULL WIDTH */
+.nav-container{
+    width:100%;
+    padding:10px 20px;
+    display:flex;
+    align-items:center;
+}
+
+/* LOGO */
+.nav-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:#111;
+}
+.nav-logo img{
+    height:40px;
+    width:40px;
+    border-radius:50%;
+}
+.brand{
+    font-size:19px;
+    font-weight:700;
+}
+.brand span{color:#ff7a00}
+
+/* MENU DESKTOP */
+.nav-menu{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:26px;
+    margin-left:auto;
+}
+.nav-menu a{
+    text-decoration:none;
+    color:#333;
+    font-size:14.5px;
+    font-weight:500;
+    padding:4px 0;
+    position:relative;
+}
+.nav-menu a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0;
+    height:2px;
+    background:#ff7a00;
+    transition:.25s;
+}
+.nav-menu a:hover::after,
+.nav-menu a.active::after{
+    width:100%;
+}
+
+/* CONTACT BUTTON */
+.nav-cta a{
+    border:2px solid #ff7a00;
+    color:#ff7a00;
+    padding:6px 16px;
+    border-radius:22px;
+    font-size:13.5px;
+    font-weight:600;
+    transition:.25s;
+}
+.nav-cta a:hover{
+    background:#ff7a00;
+    color:#fff;
+}
+
+/* TOGGLE BUTTON */
+.menu-toggle{
+    display:none;
+    margin-left:auto;
+    padding:5px 9px;
+    border:2px solid #ff7a00;
+    border-radius:6px;
+    cursor:pointer;
+}
+.menu-toggle span{
+    display:block;
+    width:20px;
+    height:2px;
+    background:#ff7a00;
+    margin:4px 0;
+    border-radius:2px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .menu-toggle{display:block}
+
+    .nav-menu{
+        position:fixed;
+        top:58px;
+        left:0;
+        width:100%;
+        background:#ffffff;
+        flex-direction:column;
+        display:none;
+        box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+
+    .nav-menu li{width:100%}
+
+    .nav-menu a{
+        width:100%;
+        padding:14px 20px;
+        font-size:15px;
+        border-bottom:1px solid #f1f1f1;
+    }
+
+    .nav-menu a::after{display:none}
+
+    /* MOBILE CTA */
+    .nav-cta{
+        padding:12px 20px;
+        background:#fafafa;
+    }
+    .nav-cta a{
+        width:100%;
+        display:block;
+        text-align:center;
+        background:#ff7a00;
+        color:#fff;
+        border:none;
+        border-radius:10px;
+        padding:12px 0;
+        font-size:15px;
+    }
+
+    .nav-menu.show{display:flex}
+}
+</style>
+
+<nav class="navbar">
+    <div class="nav-container">
+
+        <a href="/" class="nav-logo">
+            <img src="{% static 'img/logo.png' %}">
+            <div class="brand"><span>शिपी</span> आमटी</div>
+        </a>
+
+        <div class="menu-toggle" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="/" class="active">मुख्यपृष्ठ</a></li>
+            <li><a href="#products">उत्पादने</a></li>
+            <li><a href="#how_to_use">वापरण्याची पद्धत</a></li>
+            <li><a href="#how_to_order">ऑर्डर कशी करावी</a></li>
+            <li><a href="#gallery">गॅलरी</a></li>
+            <li><a href="#about_us">आमच्याबद्दल</a></li>
+            <li class="nav-cta"><a href="#contact_us">संपर्क</a></li>
         </ul>
-      </div>
+
     </div>
-  </nav>
+</nav>
+
+<script>
+function toggleNav(){
+    document.getElementById("navMenu").classList.toggle("show");
+}
+</script>

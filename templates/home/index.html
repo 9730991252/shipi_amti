@@ -1,436 +1,148 @@
 {% extends 'home/base.html' %}
 {% block head %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-{% if i.image1 %}
-
-<meta property="og:image" content="https://shipiamti.com{{i.image1.url}}">
-
-{% endif %}
-
 {% endblock head %}
 {% block content %}
 {% include 'include/navbar.html' %}
 {% load static %}
-{% load home_tag %}
-{% load embed_video_tags %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+{% load static %}
+
 <style>
-      .checked {
-      color: orange;
+/* ========== HERO SECTION ========== */
+#hero{
+    width:100%;
+    background:linear-gradient(135deg,#1f6b3a,#2e8b57);
+    padding:60px 20px;
+    color:#fff;
+}
+
+.hero-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:40px;
+}
+
+/* LEFT CONTENT */
+.hero-content{
+    flex:1;
+}
+.hero-tag{
+    display:inline-block;
+    background:#ff7a00;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+.hero-content h1{
+    font-size:42px;
+    line-height:1.2;
+    margin-bottom:15px;
+}
+.hero-content h1 span{
+    color:#ffcc80;
+}
+.hero-content p{
+    font-size:18px;
+    line-height:1.6;
+    margin-bottom:25px;
+    opacity:.95;
+}
+
+/* BUTTONS */
+.hero-buttons{
+    display:flex;
+    gap:15px;
+}
+.hero-buttons a{
+    text-decoration:none;
+    padding:12px 26px;
+    border-radius:30px;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+.btn-primary{
+    background:#ff7a00;
+    color:#fff;
+}
+.btn-primary:hover{
+    background:#e66b00;
+}
+.btn-outline{
+    border:2px solid #fff;
+    color:#fff;
+}
+.btn-outline:hover{
+    background:#fff;
+    color:#1f6b3a;
+}
+
+/* RIGHT IMAGE */
+.hero-image{
+    flex:1;
+    text-align:center;
+}
+.hero-image img{
+    max-width:100%;
+    border-radius:16px;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+/* ========== MOBILE ========== */
+@media(max-width:900px){
+    .hero-container{
+        flex-direction:column;
+        text-align:center;
     }
-.hero {
-    background: url('{% static "img/add.jpg" %}') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-}
-.navbar{
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: +1;
-
-}
-
-/* ----------------------------------------------------------------------------------------------- */
-.prograss_div {
-  display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
-  align-items: center;
-  gap: 16px;
-  padding: 4px 8px;
-  margin: 10px 0;
-  font-family: 'Inter', sans-serif;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-}
-
-/* Label */
-.prograss_div > div:first-child {
-  font-weight: 600;
-  font-size: 15px;
-  color: #333;
-  white-space: nowrap;
-  position: relative;
-}
-.prograss_div > div:first-child::before {
-  position: absolute;
-  left: -18px;
-  font-size: 16px;
-}
-
-/* Progress wrapper (still gets style="width: 80%" from HTML) */
-.progress {
-  height: 16px;
-  background: #e0e0e0;
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-  position: relative;
-}
-
-/* Progress fill bar */
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #ffb700, #fdd835);
-  background-size: 200% 100%;
-  border-radius: 999px;
-  transition: width 0.5s ease-in-out;
-}
-
-
-/* Percentage text */
-.prograss_div > div:last-child {
-  font-weight: 600;
-  font-size: 14px;
-  color: #2c3e50;
-  text-align: right;
-  white-space: nowrap;
-}
-/* ----------------------------------------------------------------------------------------------- */
-@media only screen and (max-width: 450px) {
-    .hero {
-    background: url('{% static "img/add.jpg" %}') no-repeat center top;
-    background-position: 0px 60px;
-
-        height: 30vh !important;
+    .hero-content h1{
+        font-size:32px;
+    }
+    .hero-content p{
+        font-size:16px;
+    }
+    .hero-buttons{
+        justify-content:center;
+        flex-wrap:wrap;
     }
 }
 </style>
-<section class="hero">
-    <br><br><br>
-</section>
 
-<div class="container body">
+<section id="hero">
+    <div class="hero-container">
 
+        <!-- CONTENT -->
+        <div class="hero-content">
+            <div class="hero-tag">अस्सल गावाकडची चव</div>
 
-<div class="category_main_box">
-    {% for c in category %}
-        <button class="category_box">
-            {{c.name}}
-        </button>
-    {% endfor %}
+            <h1>
+                <span>शिपी आमटी</span><br>
+                मिक्स मसाला
+            </h1>
 
-</div>
+            <p>
+                गावाकडच्या पारंपरिक रेसिपीप्रमाणे बनवलेला  
+                अस्सल, चविष्ट आणि सुगंधी आमटी मसाला.  
+                घरच्या जेवणाला देतो खास गावाची आठवण.
+            </p>
 
-
-
-<div class="item_main_box">
-    {% for i in item %}
-        <div class="item_box" style="height: fit-content;">
-            <!-- img -->
-              <div id="carouselExample" class="carousel slide " data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="{% if i.image1.url != None %}{{i.image1.url}}{% endif %}"  alt="No Image">
-                  </div>
-                    {% if i.image2.url != None %}
-                    <div class="carousel-item active">
-                        <img src="{{i.image2.url}}"  alt="No Image">
-                    </div>
-                    {% endif %}
-                    {% if i.image3.url != None %}
-                    <div class="carousel-item active">
-                        <img src="{{i.image3.url}}"  alt="No Image">
-                    </div>
-                    {% endif %}
-                    {% if i.image4.url != None %}
-                    <div class="carousel-item active">
-                        <img src="{{i.image4.url}}"  alt="No Image">
-                    </div>
-                    {% endif %}
-                    {% if i.image5.url != None %}
-                    <div class="carousel-item active">
-                        <img src="{{i.image5.url}}"  alt="No Image">
-                    </div>
-                    {% endif %}
-                </div>
-              </div>
-              <!-- endimg -->
-
-              <div id="video{{i.id}}" style="display: none;">{% video i.youtube_url '280x215'  %}</div>
-            <!-- name -->
-             <div class="p-2">
-                 <div class="container" style="display: flex; gap: 10px;justify-content: space-evenly;">
-                    <h4 data-aos="fade-right" data-aos-duration="2000" ><b>{{i.name}}</b></h4>
-                    </div>
-                 <div class="" style="display: flex; gap: 10px;justify-content: space-evenly;">
-                    {% if i.youtube_url != None %}
-                        <div onclick="see_video('{{i.id}}')"><i class="fa fa-youtube-play" style="font-size:30px;color:red"></i></div>
-                        {% endif %}
-                    <div><a href="https://api.whatsapp.com/send?phone=&text=*{{i.name}}* %0a  🙏🙏अस्सल चवदार!! मसाला दमदार!!🙏🙏 %0a *हॉटेल आशीर्वाद* घेऊन येत आहे अतिशय चवदार असा *शिपी आमटी मसाला* %0a  👌रुचकर, स्वादिष्ट आणि गावरान चव..... %0a 👍किंमत कमी अन् विश्वासाची हमी %0a 🏃‍♂️ चला तर मग आजच खरेदी करा शिपी आमटी मिक्स मसाला..... %0a 🏨 *हॉटेल आशीर्वाद* 🏨 %0a संपूर्ण महाराष्ट्रात  %0a   ऑनलाईन आणि घरपोच सेवा उपलब्ध...... 🚚 %0a %0a त्वरित  *https://shipiamti.com/*  या वेबसाइट ला भेट द्या... अन् बुक करा आपली ऑर्डर अगदी सोप्या पद्धतीने..... %0a संपर्क : 9730268423 / 9561190035" target="_blank"><i class="fa-brands fa-whatsapp" style="color: green; font-size: 30px;"></i></a></div>
-                    </div>
-                 <p class="text-start" onclick="read_more('{{i.id}}')" id="main_description{{i.id}}" style="font-weight: 500;">{{i.description|slice:50}}... <button type="button" class="btn btn-sm text-danger">Read More</button></p>  
-                 <div id="description{{i.id}}" style="display: none;" >
-                     <p class="text-start" onclick="read_less('{{i.id}}')" >{{i.description}} </p>  
-                     {% video i.youtube_url '280x200'  %}
-                     {% include 'include/producer_info.html' %}
-                     <button type="button" onclick="read_less('{{i.id}}')" class="btn btn-sm text-success">Read Less</button>
-                </div>
+            <div class="hero-buttons">
+                <a href="#products" class="btn-primary">आमची उत्पादने</a>
+                <a href="#contact_us" class="btn-outline">संपर्क करा</a>
             </div>
-            <!-- endname -->
-             <div class="footer">
-                {% price_and_weight i.id  %}
-
-
-                <div id="mob{{i.id}}" style="display: none;">
-                    <h6>Enter Delivery Information </h6>
-                    <input type="number" style="width: 200px;margin: 0 auto;border: 1px solid black;" oninput="check_number('{{i.id}}')" id="mo{{i.id}}" class="form-control" placeholder="Enter Mobile Number " >
-                    <button style="display: none;" type="button" class="mt-2 btn btn-danger" id="submit_btn{{i.id}}" onclick="check_customer('{{i.id}}')">Submit</button>
-                  </div>
-
-                <div id="qty_box{{i.id}}"></div>
-            </div>
-            <div style="display: flex;justify-content: space-evenly;" data-bs-toggle="modal" data-bs-target="#rate{{i.id}}">
-                  <b>{{i.average_ratings}}</b>
-                  <div>
-                      <span class="fa fa-star {% if i.average_ratings >= 1 %} checked {% endif %}"></span>
-                      {% if i.average_ratings == 1.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if i.average_ratings >= 2 %} checked {% endif %}"></span>{% endif %}
-                      {% if i.average_ratings == 2.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if i.average_ratings >= 3 %} checked {% endif %}"></span>{% endif %}
-                      {% if i.average_ratings == 3.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if i.average_ratings >= 4 %} checked {% endif %}"></span>{% endif %}
-                      {% if i.average_ratings == 4.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if i.average_ratings >= 5 %} checked {% endif %}"></span>{% endif %}
-                    </div>
-                  <h> &nbsp; {{i.total_r}} Ratings</h>
-              </div>
-              <br>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="rate{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Rate To {{i.name}}</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>Click on the Star for Rattings</p>
+        <!-- IMAGE -->
+        <div class="hero-image">
+            <img src="{% static 'img/add.png' %}" alt="Shipi Amti Mix Masala">
+        </div>
 
-    
-                  <!--------------------------------------------------------->
-                  <div class="prograss_div">
-                    <div>5 star</div>
-                    <div class="progress" style="width: 80%;" role="progressbar"  aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar w-{{i.5_star_per}}"></div>
-                    </div>
-                    <div>{{i.5_star_per}}%</div>
-                  </div>
-  
-                  <div class="prograss_div">
-                    <div >4 star</div>
-                    <div class="progress" style="width: 80%;" role="progressbar"  aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar w-{{i.4_star_per}}"></div>
-                    </div>
-                    <div >{{i.4_star_per}}%</div>
-                  </div>
-  
-                  <div class="prograss_div">
-                    <div >3 star</div>
-                    <div class="progress" style="width: 80%;" role="progressbar"  aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar w-{{i.3_star_per}}"></div>
-                    </div>
-                    <div >{{i.3_star_per}}%</div>
-                  </div>
-  
-                  <div class="prograss_div">
-                    <div>2 star</div>
-                    <div class="progress" style="width: 80%;" role="progressbar"  aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar w-{{i.2_star_per}}"></div>
-                    </div>
-                    <div>{{i.2_star_per}}%</div>
-                  </div>
-  
-                  <div class="prograss_div">
-                    <div>1 star</div>
-                    <div class="progress" style="width: 80%;" role="progressbar"  aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar w-{{i.1_star_per}}"></div>
-                    </div>
-                    <div>{{i.1_star_per}}%</div>
-                  </div>
-                  <!--------------------------------------------------------->
-
-                  <br>
-
-                  {% for r in i.all_r %}
-                  <hr>
-                  <div style="margin-top: -10px;margin-bottom: -10px;">
-                    <div><img src="{% static 'img/profile.jpg' %}" width="30" alt=""> {{r.customer.name}}</div>
-                    <div style="display: flex;">
-                      {% if r.star == 5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if r.star >= 1 %} checked {% endif %}"></span>{% endif %}
-                      {% if r.star == 1.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if r.star >= 2 %} checked {% endif %}"></span>{% endif %}
-                      {% if r.star == 2.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if r.star >= 3 %} checked {% endif %}"></span>{% endif %}
-                      {% if r.star == 3.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if r.star >= 4 %} checked {% endif %}"></span>{% endif %}
-                      {% if r.star == 4.5 %}<i class="fa fa-star-half checked"></i>{% else %}<span class="fa fa-star {% if r.star >= 5 %} checked {% endif %}"></span>{% endif %}
-                      <div>&nbsp;&nbsp;&nbsp;</div>
-                      <div><b>{{r.reviev_title}}</b></div>
-                    </div>
-                    <p style="margin-bottom: -5px;">Reviewed in India on {{r.date}} </p>
-                    <b style="color: rgb(136, 12, 12);font-size: 12px;">| Verified Purchase</b>
-                    <p>{{r.reviev_description}}</p>
-                  </div>
-                  {% endfor %}
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
     </div>
-    
-</div>
-
-<!----------------------------------------------------------------------------->
-<style>
-    .main_footer{
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #d3d3d3;
-        padding: 10px;
-        text-align: center;
-        right: 0;
-        display: grid;
-        grid-template-columns: 1.5fr 1fr 1fr;
-        align-items: center;
-        z-index: 123121;
-    }
-</style>
-<div class="main_footer">
-
-    <div><a href="/order/" class="btn btn-light">Orders</a></div>
-    <div> <b>Rs.</b><b id="total_amount">{{total_amount}}</b></div>
-    <div><a href="/order/cart/" id="place_order_btn" class="btn btn-warning btn-sm"> <i class="fa-solid fa-cart-shopping"></i> <b id="cart_qty" style="border-radius: 50%; padding: 2px;background-color: red;color: white;">{{cart_qty}}</b> </a></div>
-
-</div>
-
-<br><br>
-<div class="text-center">
-  <b>शिपी आमटी रेसिपी व्हिडिओ</b><br>
-<iframe width="360" height="200" src="https://www.youtube.com/embed/4KtO9joSmoI?si=WBfbuTty8lQT3Gkr" style="border-radius: 10px;" frameborder="0"></iframe>
-</div>
-<br><br>
-<div style="background-color: rgb(255, 255, 255);padding: 10px;">
-    {% include 'include/producer_info.html' %}
-</div>
-<br><br>
-<div class="text-center"><h6><a style="text-decoration: none;color: black;">सर्व प्रकारचे बारकोड व बिलिंग सॉफ्टवेअर तयार करून मिळतील &nbsp; PRASANNA DIGITAL - 9730991252</a></h6></div>
-<br><br>
-<br><br>
-
-<!----------------------------------------------------------------------------->
-<script>
-    see_video_last_id = ''
-function see_video(id){
-    if(see_video_last_id == id){
-        document.getElementById('video'+id).style.display = 'none';
-    }
-    else{
-        document.getElementById('video' + id).style.display = 'unset'; 
-    }
-    see_video_last_id = id
-    console.log(see_video_last_id)
-}
-function read_more(id){
-    document.getElementById('main_description'+id).style.display = 'none';
-    document.getElementById('description'+id).style.display = 'unset';
-}
-function read_less(id){
-    document.getElementById('main_description'+id).style.display = 'unset';
-    document.getElementById('description'+id).style.display = 'none';
-}
-
-last_price_and_weight_id = ''
-last_qty_box_id = ''
-
-function add_to_cart(item_id, prise_and_weight_id) {
-    qty = document.getElementById('qty'+prise_and_weight_id).value
-    $.ajax({
-        url: "{% url 'add_to_cart' %}",
-        method: "GET",
-        data:{
-            item_id:item_id,
-            qty:qty,
-            prise_and_weight_id:prise_and_weight_id,
-        },
-        success: function(res){
-            document.getElementById('total_amount').innerText = res.total_amount
-            document.getElementById('qty_box'+item_id).innerHTML = `<div class="mt-2 alert alert-success">This Item is added to Cart</div>`                    
-            document.getElementById('place_order_btn').style.display = 'unset';
-            document.getElementById('cart_qty').innerText = res.cart_qty;
-        }
-    });
-}
+</section>
 
 
-function check_number(id){
-    mobile=document.getElementById('mo'+id).value;
-            if (mobile.length <= 9 ){
-            document.getElementById('mo'+id).style.borderColor ='green';return false;
-            document.getElementById('submit_btn'+id).style.display = 'none';
-        }
-        if (mobile.length >= 11 ){
-            alert('only 10 digit number ')
-            document.getElementById('mo'+id).value='';
-            document.getElementById('submit_btn'+id).style.display = 'none';
-        }
-        if (mobile.length == 10 ){
-                document.getElementById('submit_btn'+id).style.display = 'unset';
-                
-                document.getElementById('mo'+id).style.borderColor ='';return true;
-                
-            }
-        }
-        
-last_prise_and_weight_id = ''
-function check_customer_sesion(p_id, prise_and_weight_id){
-    if (last_prise_and_weight_id){
-        document.getElementById('item_detail'+last_prise_and_weight_id).style.display = 'none';
-        document.getElementById('price_and_weight_btn'+last_prise_and_weight_id).style.backgroundColor = '#FFFFFF';
-    }
-    document.getElementById('item_detail'+prise_and_weight_id).style.display = 'unset';
-    document.getElementById('price_and_weight_btn'+prise_and_weight_id).style.backgroundColor = '#FFC107';
-    last_prise_and_weight_id = prise_and_weight_id
-
-}
-
-function plus(id, price){
-    var qty = document.getElementById('qty'+id).value
-    qty++;
-    document.getElementById('qty'+id).value=qty;
-    p=qty*price
-    document.getElementById('total_amount'+id).innerText=p;
-        //speak code
-        
-    const msg = new SpeechSynthesisUtterance;
-    msg.text=qty;
-    
-    msg.voice=speechSynthesis.getVoices()[1];
-    speechSynthesis.speak(msg);
-  
-}
-
-function minus(id, price, sell_minimum_quantity){
-    var qty = document.getElementById('qty'+id).value
-  if(qty > sell_minimum_quantity){
-    qty--;
-    document.getElementById('qty'+id).value=qty;
-    p=qty*price
-    document.getElementById('total_amount'+id).innerText=p;
-            //speak code
-            
-        const msg = new SpeechSynthesisUtterance;
-        msg.text=qty;
-        
-        msg.voice=speechSynthesis.getVoices()[1];
-        speechSynthesis.speak(msg);
-  }
-}
-</script>
 {% endblock content %}

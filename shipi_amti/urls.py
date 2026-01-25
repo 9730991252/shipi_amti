@@ -23,9 +23,4 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('owner/', include('owner.urls')),
-    path('ajax/', include('ajax.urls')),
-    path('order/', include('order.urls')),
-    path('sunil/', include('sunil.urls')),
-    path('hotel/', include('hotel.urls')),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
