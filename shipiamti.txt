@@ -189,4 +189,4 @@ systemctl restart shipi_amti.com.gunicorn
 
 --------------------------------------- ssl ------------------
 
- certbot --nginx -d shipiamti.com -d www.shipiamti.com
+ certbot --nginx -d shipiamti.com

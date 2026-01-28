@@ -11,10 +11,15 @@
 /* ========== HERO SECTION ========== */
 #hero{
     width:100%;
-    background:linear-gradient(135deg,#1f6b3a,#2e8b57);
+    background:linear-gradient(
+        135deg,
+        #ffb703,   /* saffron yellow */
+        #ff7a00    /* brand orange */
+    );
     padding:60px 20px;
     color:#fff;
 }
+
 
 .hero-container{
     max-width:1200px;
@@ -44,8 +49,9 @@
     margin-bottom:15px;
 }
 .hero-content h1 span{
-    color:#ffcc80;
+    color:#fff3b0;
 }
+
 .hero-content p{
     font-size:18px;
     line-height:1.6;
@@ -144,5 +150,596 @@
     </div>
 </section>
 
+
+
+<style>
+/* ========== PRODUCTS SECTION ========== */
+#products{
+    width:100%;
+    padding:70px 20px;
+    background:#fafafa;
+}
+
+.products-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+.section-title h2{
+    font-size:34px;
+    color:#222;
+    margin-bottom:10px;
+}
+.section-title p{
+    font-size:16px;
+    color:#666;
+}
+
+/* PRODUCT CARD */
+.product-card{
+    display:flex;
+    gap:40px;
+    background:#fff;
+    border-radius:18px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    align-items:center;
+}
+
+/* IMAGE */
+.product-image{
+    flex:1;
+    text-align:center;
+}
+.product-image img{
+    max-width:100%;
+    border-radius:12px;
+}
+
+/* CONTENT */
+.product-content{
+    flex:1.2;
+}
+.product-badge{
+    display:inline-block;
+    background:#ff7a00;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+.product-content h3{
+    font-size:28px;
+    margin-bottom:12px;
+}
+.product-content p{
+    font-size:16px;
+    color:#555;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+/* FEATURES */
+.product-features{
+    list-style:none;
+    margin-bottom:25px;
+}
+.product-features li{
+    font-size:15px;
+    color:#444;
+    margin-bottom:8px;
+    position:relative;
+    padding-left:20px;
+}
+.product-features li::before{
+    content:"✔";
+    position:absolute;
+    left:0;
+    color:#ff7a00;
+    font-weight:bold;
+}
+
+/* BUTTON */
+.product-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#ff7a00;
+    color:#fff;
+    padding:12px 28px;
+    border-radius:30px;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+.product-btn:hover{
+    background:#e66b00;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .product-card{
+        flex-direction:column;
+        text-align:center;
+    }
+    .product-content h3{
+        font-size:24px;
+    }
+}
+</style>
+
+<section id="products">
+    <div class="products-container">
+
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h2>आमचे उत्पादन</h2>
+            <p>गावाकडच्या पारंपरिक चवीचा अस्सल अनुभव</p>
+        </div>
+
+        <!-- PRODUCT -->
+        <div class="product-card">
+
+            <!-- IMAGE -->
+            <div class="product-image">
+                <img src="{% static 'img/product-1.jpg' %}" alt="शिपी आमटी मिक्स मसाला">
+            </div>
+
+            <!-- CONTENT -->
+            <div class="product-content">
+                <div class="product-badge">Best Seller</div>
+
+                <h3>शिपी आमटी मिक्स मसाला</h3>
+
+                <p>
+                    पारंपरिक पद्धतीने तयार केलेला शिपी आमटी मिक्स मसाला.
+                    घरच्या घरी अस्सल गावाकडची आमटी बनवण्यासाठी खास मिश्रण.
+                    कोणतेही अतिरिक्त मसाले न घालता परिपूर्ण चव.
+                </p>
+
+                <ul class="product-features">
+                    <li>अस्सल गावाकडची चव</li>
+                    <li>घरगुती व स्वच्छ पद्धतीने तयार</li>
+                    <li>Easy to Cook</li>
+                    <li>कोणतेही कृत्रिम रंग नाहीत</li>
+                </ul>
+
+                <a href="#contact_us" class="product-btn">ऑर्डर साठी संपर्क करा</a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<style>
+/* ========== HOW TO USE SECTION ========== */
+#how_to_use{
+    width:100%;
+    padding:70px 20px;
+    background:#ffffff;
+}
+
+.howto-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+/* TITLE */
+.howto-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+.howto-title h2{
+    font-size:34px;
+    color:#222;
+    margin-bottom:10px;
+}
+.howto-title p{
+    font-size:16px;
+    color:#666;
+}
+
+/* CONTENT */
+.howto-content{
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+
+/* STEPS */
+.howto-steps{
+    flex:1;
+}
+.step{
+    display:flex;
+    gap:15px;
+    margin-bottom:18px;
+}
+.step-number{
+    min-width:38px;
+    height:38px;
+    background:#ff7a00;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+}
+.step-text{
+    font-size:16px;
+    color:#444;
+    line-height:1.6;
+}
+
+/* VIDEO */
+.howto-video{
+    flex:1;
+}
+.howto-video iframe{
+    width:100%;
+    height:315px;
+    border-radius:14px;
+    border:none;
+    box-shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .howto-content{
+        flex-direction:column;
+    }
+    .howto-video iframe{
+        height:220px;
+    }
+}
+</style>
+
+<section id="how_to_use">
+    <div class="howto-container">
+
+        <!-- TITLE -->
+        <div class="howto-title">
+            <h2>वापरण्याची पद्धत</h2>
+            <p>घरच्या घरी अस्सल शिपी आमटी कशी बनवायची</p>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="howto-content">
+
+            <!-- STEPS -->
+            <div class="howto-steps">
+
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        कढईत किंवा भांड्यात मध्यम आचेवर तेल गरम करा.
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        त्यात बारीक चिरलेला कांदा घालून गुलाबी होईपर्यंत परता.
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        लसूण, आलं (हवे असल्यास) घालून थोडा वेळ परता.
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">
+                        त्यात <b>शिपी आमटी मिक्स मसाला</b> घालून मंद आचेवर परता.
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-text">
+                        आवश्यकतेनुसार पाणी घालून आमटीला उकळी आणा.
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-text">
+                        5–10 मिनिटे शिजू द्या व गरमागरम आमटी सर्व्ह करा 🍲
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- VIDEO -->
+            <div class="howto-video">
+                <iframe src="https://www.youtube.com/embed/4KtO9joSmoI?si=cdi1gp2ldXGuIGMU" title="शिपी आमटी वापरण्याची पद्धत" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<style>
+/* ========== HOW TO ORDER SECTION ========== */
+#how_to_order{
+    width:100%;
+    padding:70px 20px;
+    background:#fafafa;
+}
+
+.order-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+/* TITLE */
+.order-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+.order-title h2{
+    font-size:34px;
+    color:#222;
+    margin-bottom:10px;
+}
+.order-title p{
+    font-size:16px;
+    color:#666;
+}
+
+/* STEPS */
+.order-steps{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+}
+
+.order-step{
+    background:#ffffff;
+    padding:30px 25px;
+    border-radius:16px;
+    text-align:center;
+    flex:1;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+}
+
+.order-step span{
+    display:inline-flex;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#ff7a00;
+    color:#fff;
+    font-weight:700;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.order-step h4{
+    font-size:18px;
+    margin-bottom:10px;
+    color:#222;
+}
+.order-step p{
+    font-size:15px;
+    color:#555;
+    line-height:1.6;
+}
+
+/* WHATSAPP CTA */
+.whatsapp-box{
+    margin-top:50px;
+    text-align:center;
+    background:#ffffff;
+    padding:35px 20px;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+}
+.whatsapp-box h3{
+    font-size:24px;
+    margin-bottom:10px;
+}
+.whatsapp-box p{
+    font-size:16px;
+    color:#555;
+    margin-bottom:20px;
+}
+
+.whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    background:#25D366;
+    color:#fff;
+    padding:14px 30px;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+.whatsapp-btn:hover{
+    background:#1ebe5d;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .order-steps{
+        flex-direction:column;
+    }
+}
+</style>
+
+<section id="how_to_order">
+    <div class="order-container">
+
+        <!-- TITLE -->
+        <div class="order-title">
+            <h2>ऑर्डर कशी करावी</h2>
+            <p>फक्त WhatsApp वरून सोपी आणि जलद ऑर्डर प्रक्रिया</p>
+        </div>
+
+        <!-- STEPS -->
+        <div class="order-steps">
+
+            <div class="order-step">
+                <span>1</span>
+                <h4>WhatsApp वर संपर्क करा</h4>
+                <p>
+                    खाली दिलेल्या WhatsApp बटणावर क्लिक करून आम्हाला मेसेज करा.
+                </p>
+            </div>
+
+            <div class="order-step">
+                <span>2</span>
+                <h4>ऑर्डर तपशील पाठवा</h4>
+                <p>
+                    उत्पादनाचे नाव, प्रमाण आणि तुमचा पत्ता WhatsApp वर पाठवा.
+                </p>
+            </div>
+
+            <div class="order-step">
+                <span>3</span>
+                <h4>डिलिव्हरी मिळवा</h4>
+                <p>
+                    ऑर्डर कन्फर्म झाल्यानंतर तुमच्या पत्त्यावर आमटी मसाला पोहोचवला जाईल.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- WHATSAPP CTA -->
+        <div class="whatsapp-box">
+            <h3>आत्ताच ऑर्डर करा</h3>
+            <p>खालील WhatsApp बटणावर क्लिक करा आणि ऑर्डर सुरू करा</p>
+
+            <!-- Replace phone number -->
+            <a 
+               href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे."
+               target="_blank"
+               class="whatsapp-btn">
+               WhatsApp वर ऑर्डर करा
+            </a>
+        </div>
+
+    </div>
+</section>
+<style>
+/* ========== GALLERY SECTION ========== */
+#gallery{
+    width:100%;
+    padding:70px 20px;
+    background:#ffffff;
+}
+
+.gallery-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+/* TITLE */
+.gallery-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+.gallery-title h2{
+    font-size:34px;
+    color:#222;
+    margin-bottom:10px;
+}
+.gallery-title p{
+    font-size:16px;
+    color:#666;
+}
+
+/* GRID */
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+/* IMAGE CARD */
+.gallery-item{
+    overflow:hidden;
+    border-radius:16px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.1);
+    cursor:pointer;
+}
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .4s ease;
+}
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .gallery-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+@media(max-width:500px){
+    .gallery-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+<section id="gallery">
+    <div class="gallery-container">
+
+        <!-- TITLE -->
+        <div class="gallery-title">
+            <h2>गॅलरी</h2>
+            <p>शिपी आमटी मिक्स मसाल्याची झलक</p>
+        </div>
+
+        <!-- IMAGES -->
+        <div class="gallery-grid">
+
+            <!-- Replace images as needed -->
+            <div class="gallery-item">
+                <img src="{% static 'img/add.png' %}" alt="शिपी आमटी मिक्स मसाला">
+            </div>
+
+            <div class="gallery-item">
+                <img src="{% static 'img/add.png' %}" alt="आमटी मसाला पॅकिंग">
+            </div>
+
+            <div class="gallery-item">
+                <img src="{% static 'img/add.png' %}" alt="घरगुती आमटी">
+            </div>
+
+            <!-- You can add more later -->
+            <!--
+            <div class="gallery-item">
+                <img src="{% static 'img/image4.png' %}">
+            </div>
+            -->
+
+        </div>
+
+    </div>
+</section>
 
 {% endblock content %}
