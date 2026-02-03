@@ -4,7 +4,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Segoe UI",Arial,sans-serif}
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 .navbar{
     width:100%;
     position:sticky;
@@ -14,7 +14,6 @@ body{font-family:"Segoe UI",Arial,sans-serif}
     border-bottom:1px solid #eaeaea;
 }
 
-/* FULL WIDTH */
 .nav-container{
     width:100%;
     padding:10px 20px;
@@ -41,7 +40,7 @@ body{font-family:"Segoe UI",Arial,sans-serif}
 }
 .brand span{color:#ff7a00}
 
-/* MENU DESKTOP */
+/* MENU */
 .nav-menu{
     list-style:none;
     display:flex;
@@ -49,6 +48,7 @@ body{font-family:"Segoe UI",Arial,sans-serif}
     gap:26px;
     margin-left:auto;
 }
+
 .nav-menu a{
     text-decoration:none;
     color:#333;
@@ -56,7 +56,10 @@ body{font-family:"Segoe UI",Arial,sans-serif}
     font-weight:500;
     padding:4px 0;
     position:relative;
+    white-space:nowrap;
 }
+
+/* UNDERLINE */
 .nav-menu a::after{
     content:"";
     position:absolute;
@@ -71,8 +74,11 @@ body{font-family:"Segoe UI",Arial,sans-serif}
 .nav-menu a.active::after{
     width:100%;
 }
+.nav-menu a.active{
+    color:#ff7a00;
+}
 
-/* CONTACT BUTTON */
+/* CTA */
 .nav-cta a{
     border:2px solid #ff7a00;
     color:#ff7a00;
@@ -80,76 +86,50 @@ body{font-family:"Segoe UI",Arial,sans-serif}
     border-radius:22px;
     font-size:13.5px;
     font-weight:600;
-    transition:.25s;
 }
 .nav-cta a:hover{
     background:#ff7a00;
     color:#fff;
 }
 
-/* TOGGLE BUTTON */
-.menu-toggle{
-    display:none;
-    margin-left:auto;
-    padding:5px 9px;
-    border:2px solid #ff7a00;
-    border-radius:6px;
-    cursor:pointer;
-}
-.menu-toggle span{
-    display:block;
-    width:20px;
-    height:2px;
-    background:#ff7a00;
-    margin:4px 0;
-    border-radius:2px;
-}
-
-/* MOBILE */
+/* ================= MOBILE (SCROLLABLE) ================= */
 @media(max-width:900px){
 
-    .menu-toggle{display:block}
+    .navbar{overflow-x:hidden}
 
-    .nav-menu{
-        position:fixed;
-        top:58px;
-        left:0;
-        width:100%;
-        background:#ffffff;
-        flex-direction:column;
-        display:none;
-        box-shadow:0 10px 30px rgba(0,0,0,.12);
+    .nav-container{
+        padding:8px 12px;
     }
 
-    .nav-menu li{width:100%}
+    .nav-menu{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        scrollbar-width:none;
+        gap:18px;
+        margin-left:14px;
+        padding:8px 4px;
+    }
+
+    .nav-menu::-webkit-scrollbar{display:none}
+
+    .nav-menu li{
+        flex-shrink:0;
+    }
 
     .nav-menu a{
-        width:100%;
-        padding:14px 20px;
-        font-size:15px;
-        border-bottom:1px solid #f1f1f1;
+        padding:8px 10px;
+        font-size:14px;
     }
 
     .nav-menu a::after{display:none}
 
-    /* MOBILE CTA */
-    .nav-cta{
-        padding:12px 20px;
-        background:#fafafa;
-    }
     .nav-cta a{
-        width:100%;
-        display:block;
-        text-align:center;
         background:#ff7a00;
         color:#fff;
         border:none;
-        border-radius:10px;
-        padding:12px 0;
-        font-size:15px;
+        padding:8px 14px;
+        border-radius:20px;
     }
-
-    .nav-menu.show{display:flex}
 }
 </style>
 
@@ -161,12 +141,8 @@ body{font-family:"Segoe UI",Arial,sans-serif}
             <div class="brand"><span>शिपी</span> आमटी</div>
         </a>
 
-        <div class="menu-toggle" onclick="toggleNav()">
-            <span></span><span></span><span></span>
-        </div>
-
-        <ul class="nav-menu" id="navMenu">
-            <li><a href="/" class="active">मुख्यपृष्ठ</a></li>
+        <ul class="nav-menu">
+            <li><a href="#hero" class="active">मुख्यपृष्ठ</a></li>
             <li><a href="#products">उत्पादने</a></li>
             <li><a href="#how_to_use">वापरण्याची पद्धत</a></li>
             <li><a href="#how_to_order">ऑर्डर कशी करावी</a></li>
@@ -178,8 +154,40 @@ body{font-family:"Segoe UI",Arial,sans-serif}
     </div>
 </nav>
 
+<!-- ================= SCROLL SPY ================= -->
 <script>
-function toggleNav(){
-    document.getElementById("navMenu").classList.toggle("show");
-}
+document.addEventListener("DOMContentLoaded", () => {
+
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-menu a");
+
+    function setActiveMenu(){
+        let scrollPos = window.scrollY + 130;
+
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute("id");
+
+            if(scrollPos >= top && scrollPos < top + height){
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+
+                    if(link.getAttribute("href") === `#${id}`){
+                        link.classList.add("active");
+
+                        /* auto-center active item on mobile */
+                        link.scrollIntoView({
+                            behavior:"smooth",
+                            inline:"center",
+                            block:"nearest"
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener("scroll", setActiveMenu);
+});
 </script>

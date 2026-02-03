@@ -287,7 +287,7 @@
 
             <!-- IMAGE -->
             <div class="product-image">
-                <img src="{% static 'img/product-1.jpg' %}" alt="शिपी आमटी मिक्स मसाला">
+                <img src="{% static 'img/product-1.png' %}" alt="शिपी आमटी मिक्स मसाला">
             </div>
 
             <!-- CONTENT -->
@@ -719,27 +719,594 @@
 
             <!-- Replace images as needed -->
             <div class="gallery-item">
-                <img src="{% static 'img/add.png' %}" alt="शिपी आमटी मिक्स मसाला">
+                <img src="{% static 'img/galery1.jpeg' %}" >
             </div>
 
             <div class="gallery-item">
-                <img src="{% static 'img/add.png' %}" alt="आमटी मसाला पॅकिंग">
+                <img src="{% static 'img/galery2.jpeg' %}" >
             </div>
 
-            <div class="gallery-item">
-                <img src="{% static 'img/add.png' %}" alt="घरगुती आमटी">
-            </div>
 
-            <!-- You can add more later -->
-            <!--
-            <div class="gallery-item">
-                <img src="{% static 'img/image4.png' %}">
-            </div>
-            -->
 
         </div>
 
     </div>
 </section>
+
+
+
+<style>
+/* ========== ABOUT US SECTION ========== */
+#about_us{
+    width:100%;
+    padding:70px 20px;
+    background:#fafafa;
+}
+
+.about-container{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+
+/* IMAGE */
+.about-image{
+    flex:1;
+    text-align:center;
+}
+.about-image img{
+    max-width:100%;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* CONTENT */
+.about-content{
+    flex:1.2;
+}
+.about-content h2{
+    font-size:34px;
+    color:#222;
+    margin-bottom:15px;
+}
+.about-content h2 span{
+    color:#ff7a00;
+}
+.about-content p{
+    font-size:16px;
+    color:#555;
+    line-height:1.7;
+    margin-bottom:15px;
+}
+
+/* HIGHLIGHTS */
+.about-points{
+    list-style:none;
+    margin-top:20px;
+}
+.about-points li{
+    font-size:15px;
+    color:#444;
+    margin-bottom:10px;
+    padding-left:22px;
+    position:relative;
+}
+.about-points li::before{
+    content:"✔";
+    position:absolute;
+    left:0;
+    color:#ff7a00;
+    font-weight:bold;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .about-container{
+        flex-direction:column;
+        text-align:center;
+    }
+}
+</style>
+
+<section id="about_us">
+    <div class="about-container">
+
+        <!-- IMAGE -->
+        <div class="about-image">
+            <img src="{% static 'img/galery1.jpeg' %}" alt="शिपी आमटी">
+        </div>
+
+        <!-- CONTENT -->
+        <div class="about-content">
+            <h2><span>आमच्याबद्दल</span></h2>
+
+            <p>
+                <b>शिपी आमटी</b> ही पारंपरिक गावाकडच्या चवीवर आधारित एक घरगुती
+                आमटी मसाला ब्रँड आहे. आमचा उद्देश प्रत्येक घरापर्यंत
+                अस्सल, शुद्ध आणि चविष्ट आमटी पोहोचवण्याचा आहे.
+            </p>
+
+            <p>
+                आमचा आमटी मिक्स मसाला पारंपरिक रेसिपीनुसार,
+                स्वच्छ आणि घरगुती पद्धतीने तयार केला जातो.
+                कोणतेही कृत्रिम रंग किंवा केमिकल्स वापरले जात नाहीत.
+            </p>
+
+            <ul class="about-points">
+                <li>अस्सल गावाकडची पारंपरिक चव</li>
+                <li>घरगुती व स्वच्छ पद्धतीने तयार</li>
+                <li>उच्च दर्जाचे मसाले वापर</li>
+                <li>ग्राहक समाधान हाच आमचा उद्देश</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+
+<style>
+/* ========== CONTACT SECTION ========== */
+#contact_us{
+    width:100%;
+    padding:70px 20px;
+    background:#ffffff;
+}
+
+.contact-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+/* TITLE */
+.contact-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+.contact-title h2{
+    font-size:34px;
+    color:#222;
+    margin-bottom:10px;
+}
+.contact-title p{
+    font-size:16px;
+    color:#666;
+}
+
+/* BOX */
+.contact-box{
+    background:#fafafa;
+    padding:40px 30px;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* DETAILS */
+.contact-details{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.contact-item{
+    background:#ffffff;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+}
+.contact-item h4{
+    font-size:16px;
+    margin-bottom:8px;
+    color:#ff7a00;
+}
+.contact-item p{
+    font-size:15px;
+    color:#444;
+    line-height:1.6;
+    word-break:break-word;
+}
+
+/* BUTTONS */
+.contact-actions{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.contact-btn{
+    text-decoration:none;
+    padding:14px 32px;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+}
+
+/* WhatsApp */
+.btn-whatsapp{
+    background:#25D366;
+    color:#fff;
+}
+.btn-whatsapp:hover{
+    background:#1ebe5d;
+}
+
+/* Call */
+.btn-call{
+    border:2px solid #ff7a00;
+    color:#ff7a00;
+}
+.btn-call:hover{
+    background:#ff7a00;
+    color:#fff;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .contact-details{
+        grid-template-columns:1fr;
+    }
+    .contact-btn{
+        width:100%;
+        justify-content:center;
+    }
+}
+</style>
+
+<section id="contact_us">
+    <div class="contact-container">
+
+        <!-- TITLE -->
+        <div class="contact-title">
+            <h2>संपर्क</h2>
+            <p>ऑर्डर किंवा अधिक माहितीसाठी आमच्याशी संपर्क साधा</p>
+        </div>
+
+        <!-- BOX -->
+        <div class="contact-box">
+
+            <!-- DETAILS -->
+            <div class="contact-details">
+
+                <div class="contact-item">
+                    <h4>मोबाइल नंबर</h4>
+                    <p>+91 919730268423</p>
+                </div>
+
+                <div class="contact-item">
+                    <h4>ई‑मेल</h4>
+                    <p>shiraskarshipiamti@gmail.com</p>
+                </div>
+
+                <div class="contact-item">
+                    <h4>पत्ता</h4>
+                    <p>
+                        शिपी आमटी,<br>
+                        गाव – कोर्टी,<br>
+                        तालुका – करमाळा,<br>
+                        जिल्हा – सोलापूर
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- BUTTONS (DO NOT REMOVE) -->
+            <div class="contact-actions">
+
+                <a 
+                  href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे."
+                  target="_blank"
+                  class="contact-btn btn-whatsapp">
+                  WhatsApp वर संपर्क करा
+                </a>
+
+                <a 
+                  href="tel:+919730268423"
+                  class="contact-btn btn-call">
+                  कॉल करा
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* ========== FIXED SOCIAL ICONS ========== */
+.fixed-social{
+    position:fixed;
+    right:16px;
+    bottom:16px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    z-index:2000;
+}
+
+.fixed-social a{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    text-decoration:none;
+    font-size:22px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    transition:transform .25s, box-shadow .25s;
+}
+
+.fixed-social a:hover{
+    transform:scale(1.1);
+    box-shadow:0 12px 28px rgba(0,0,0,0.35);
+}
+
+/* WhatsApp */
+.fixed-social .whatsapp{
+    background:#25D366;
+}
+
+/* YouTube */
+.fixed-social .youtube{
+    background:#FF0000;
+}
+
+/* MOBILE SIZE */
+@media(max-width:600px){
+    .fixed-social a{
+        width:44px;
+        height:44px;
+        font-size:20px;
+    }
+}
+</style>
+<!-- FIXED SOCIAL ICONS -->
+<div class="fixed-social">
+
+    <!-- WhatsApp -->
+    <a 
+      href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे."
+      target="_blank"
+      class="whatsapp"
+      aria-label="WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a 
+      href="https://www.youtube.com/@santoshshiraskar96"
+      target="_blank"
+      class="youtube"
+      aria-label="YouTube">
+      <i class="fa-brands fa-youtube"></i>
+    </a>
+
+</div>
+
+
+
+
+
+<style>
+/* ================= MODERN FOOTER ================= */
+footer{
+    background:#121212;
+    color:#d1d1d1;
+    padding:70px 20px 0;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+/* MAIN GRID */
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2.2fr 1.2fr 1.6fr 1fr;
+    gap:40px;
+}
+
+/* BRAND */
+.footer-brand h3{
+    font-size:22px;
+    color:#ffffff;
+    margin-bottom:12px;
+}
+.footer-brand h3 span{
+    color:#ff7a00;
+}
+.footer-brand p{
+    font-size:14.5px;
+    line-height:1.7;
+    color:#cfcfcf;
+}
+
+/* TITLES */
+.footer-box h4{
+    font-size:16px;
+    color:#ffffff;
+    margin-bottom:14px;
+    position:relative;
+}
+.footer-box h4::after{
+    content:"";
+    width:36px;
+    height:2px;
+    background:#ff7a00;
+    display:block;
+    margin-top:6px;
+}
+
+/* LINKS */
+.footer-links{
+    list-style:none;
+}
+.footer-links li{
+    margin-bottom:10px;
+}
+.footer-links a{
+    text-decoration:none;
+    color:#cfcfcf;
+    font-size:14.5px;
+    transition:.25s;
+}
+.footer-links a:hover{
+    color:#ff7a00;
+    padding-left:4px;
+}
+
+/* CONTACT */
+.footer-contact p{
+    font-size:14.5px;
+    margin-bottom:10px;
+    line-height:1.7;
+}
+
+/* SOCIAL */
+.footer-social{
+    display:flex;
+    gap:12px;
+    margin-top:10px;
+}
+.footer-social a{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    text-decoration:none;
+    transition:.3s;
+    font-weight: 700;
+}
+.footer-social a:hover{
+    background:#ff7a00;
+    transform:translateY(-3px);
+}
+
+/* BOTTOM BAR */
+.footer-bottom{
+    margin-top:50px;
+    padding:18px 20px;
+    border-top:1px solid #2a2a2a;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+    font-size:14px;
+    color:#aaa;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+    .footer-social{
+        justify-content:center;
+    }
+    .footer-box h4::after{
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .footer-bottom{
+        flex-direction:column;
+        gap:8px;
+        text-align:center;
+    }
+}
+</style>
+
+<footer>
+
+    <div class="footer-container">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+            <h3><span>शिपी</span> आमटी</h3>
+            <p>
+                पारंपरिक गावाकडच्या चवीवर आधारित अस्सल
+                शिपी आमटी मिक्स मसाला. घरगुती, शुद्ध
+                आणि चविष्ट आमटीसाठी विश्वासाचं नाव.
+            </p>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="footer-box">
+            <h4>दुवे</h4>
+            <ul class="footer-links">
+                <li><a href="#hero">मुख्यपृष्ठ</a></li>
+                <li><a href="#products">उत्पादने</a></li>
+                <li><a href="#how_to_use">वापरण्याची पद्धत</a></li>
+                <li><a href="#how_to_order">ऑर्डर कशी करावी</a></li>
+                <li><a href="#gallery">गॅलरी</a></li>
+                <li><a href="#about_us">आमच्याबद्दल</a></li>
+                <li><a href="#contact_us">संपर्क</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="footer-box footer-contact">
+            <h4>संपर्क</h4>
+            <p>📞 +91 919730268423</p>
+            <p>✉️ shiraskarshipiamti@gmail.com</p>
+            <p>
+                📍 शिपी आमटी,<br>
+                गाव – कोर्टी, तालुका – करमाळा,<br>
+                जिल्हा – सोलापूर
+            </p>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="footer-box">
+            <h4>Follow Us</h4>
+            <div class="footer-social">
+                <a style="background-color: green;" href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे." target="_blank"><i class="fa-brands fa-whatsapp" style="color: rgb(255, 255, 255);"></i></a>
+                <a href="https://www.youtube.com/watch?v=4KtO9joSmoI" target="_blank"><i class="fa-brands fa-youtube" style="color: red;"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+        <span>© <span id="year"></span> शिपी आमटी. सर्व हक्क राखीव.</span>
+        <span>Developed by <b>PRASANNA DIGITAL</b></span>
+    </div>
+
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 {% endblock content %}
