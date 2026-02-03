@@ -7,113 +7,160 @@
 
 {% load static %}
 
+{% load static %}
+
 <style>
-/* ========== HERO SECTION ========== */
+/* ================= HERO SECTION ================= */
 #hero{
     width:100%;
-    background:linear-gradient(
-        135deg,
-        #ffb703,   /* saffron yellow */
-        #ff7a00    /* brand orange */
-    );
-    padding:60px 20px;
-    color:#fff;
+    background:linear-gradient(135deg,#fff6e5,#ffe0b2);
+    padding:90px 20px 80px;
+    position:relative;
+    overflow:hidden;
 }
-
 
 .hero-container{
     max-width:1200px;
     margin:auto;
     display:flex;
     align-items:center;
-    gap:40px;
+    gap:50px;
 }
 
 /* LEFT CONTENT */
 .hero-content{
-    flex:1;
+    flex:1.1;
 }
-.hero-tag{
+
+.hero-badge{
     display:inline-block;
     background:#ff7a00;
     color:#fff;
-    padding:6px 14px;
-    border-radius:20px;
+    padding:6px 16px;
+    border-radius:30px;
     font-size:14px;
     font-weight:600;
-    margin-bottom:15px;
+    margin-bottom:16px;
 }
+
 .hero-content h1{
-    font-size:42px;
+    font-size:46px;
     line-height:1.2;
-    margin-bottom:15px;
+    margin-bottom:18px;
+    color:#222;
 }
+
 .hero-content h1 span{
-    color:#fff3b0;
+    color:#ff7a00;
 }
 
 .hero-content p{
     font-size:18px;
-    line-height:1.6;
-    margin-bottom:25px;
-    opacity:.95;
+    line-height:1.7;
+    color:#444;
+    margin-bottom:28px;
+    max-width:520px;
 }
 
-/* BUTTONS */
+/* HERO BUTTONS */
 .hero-buttons{
     display:flex;
-    gap:15px;
+    gap:16px;
+    flex-wrap:wrap;
 }
-.hero-buttons a{
+
+.hero-btn{
     text-decoration:none;
-    padding:12px 26px;
-    border-radius:30px;
-    font-size:15px;
+    padding:14px 34px;
+    border-radius:40px;
+    font-size:16px;
     font-weight:600;
     transition:.3s;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
 }
-.btn-primary{
-    background:#ff7a00;
+
+/* WhatsApp */
+.btn-whatsapp{
+    background:#25D366;
     color:#fff;
 }
-.btn-primary:hover{
-    background:#e66b00;
+.btn-whatsapp:hover{
+    background:#1ebe5d;
 }
+
+/* Secondary */
 .btn-outline{
-    border:2px solid #fff;
-    color:#fff;
+    border:2px solid #ff7a00;
+    color:#ff7a00;
 }
 .btn-outline:hover{
-    background:#fff;
-    color:#1f6b3a;
+    background:#ff7a00;
+    color:#fff;
 }
 
 /* RIGHT IMAGE */
 .hero-image{
-    flex:1;
+    flex:0.9;
     text-align:center;
-}
-.hero-image img{
-    max-width:100%;
-    border-radius:16px;
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
+    position:relative;
 }
 
-/* ========== MOBILE ========== */
+.hero-image::before{
+    content:"";
+    position:absolute;
+    width:320px;
+    height:320px;
+    background:#ff7a00;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    opacity:.12;
+    z-index:0;
+}
+
+.hero-image img{
+    max-width:100%;
+    max-height:420px;
+    position:relative;
+    z-index:1;
+    filter:drop-shadow(0 20px 40px rgba(0,0,0,0.25));
+}
+
+/* ================= MOBILE ================= */
 @media(max-width:900px){
+    #hero{
+        padding:70px 16px 60px;
+    }
+
     .hero-container{
-        flex-direction:column;
+        flex-direction:column-reverse;
         text-align:center;
     }
+
     .hero-content h1{
-        font-size:32px;
+        font-size:34px;
     }
+
     .hero-content p{
         font-size:16px;
+        margin-left:auto;
+        margin-right:auto;
     }
+
     .hero-buttons{
         justify-content:center;
-        flex-wrap:wrap;
+    }
+
+    .hero-image::before{
+        width:240px;
+        height:240px;
+    }
+
+    .hero-image img{
+        max-height:320px;
     }
 }
 </style>
@@ -121,9 +168,9 @@
 <section id="hero">
     <div class="hero-container">
 
-        <!-- CONTENT -->
+        <!-- TEXT CONTENT -->
         <div class="hero-content">
-            <div class="hero-tag">अस्सल गावाकडची चव</div>
+            <div class="hero-badge">अस्सल गावाकडची चव</div>
 
             <h1>
                 <span>शिपी आमटी</span><br>
@@ -131,20 +178,28 @@
             </h1>
 
             <p>
-                गावाकडच्या पारंपरिक रेसिपीप्रमाणे बनवलेला  
-                अस्सल, चविष्ट आणि सुगंधी आमटी मसाला.  
-                घरच्या जेवणाला देतो खास गावाची आठवण.
+                पारंपरिक गावाकडच्या रेसिपीनुसार तयार केलेला
+                शुद्ध, चविष्ट आणि सुगंधी आमटी मसाला.
+                घरच्या जेवणाला देतो अस्सल महाराष्ट्राची आठवण.
             </p>
 
             <div class="hero-buttons">
-                <a href="#products" class="btn-primary">आमची उत्पादने</a>
-                <a href="#contact_us" class="btn-outline">संपर्क करा</a>
+                <a 
+                  href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे."
+                  target="_blank"
+                  class="hero-btn btn-whatsapp">
+                  WhatsApp वर ऑर्डर करा
+                </a>
+
+                <a href="#products" class="hero-btn btn-outline">
+                  आमचे उत्पादन
+                </a>
             </div>
         </div>
 
-        <!-- IMAGE -->
+        <!-- PRODUCT IMAGE -->
         <div class="hero-image">
-            <img src="{% static 'img/add.png' %}" alt="Shipi Amti Mix Masala">
+            <img  loading="lazy" src="{% static 'img/product-1.png' %}" alt="शिपी आमटी मिक्स मसाला">
         </div>
 
     </div>
@@ -152,25 +207,30 @@
 
 
 
+
+{% load static %}
+
 <style>
 /* ========== PRODUCTS SECTION ========== */
 #products{
     width:100%;
-    padding:70px 20px;
+    padding:90px 20px;
     background:#fafafa;
 }
 
+/* CONTAINER */
 .products-container{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
 }
 
+/* TITLE */
 .section-title{
     text-align:center;
-    margin-bottom:50px;
+    margin-bottom:60px;
 }
 .section-title h2{
-    font-size:34px;
+    font-size:36px;
     color:#222;
     margin-bottom:10px;
 }
@@ -182,60 +242,75 @@
 /* PRODUCT CARD */
 .product-card{
     display:flex;
-    gap:40px;
-    background:#fff;
-    border-radius:18px;
-    padding:35px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    gap:50px;
+    background:#ffffff;
+    border-radius:22px;
+    padding:40px;
+    box-shadow:0 20px 45px rgba(0,0,0,0.08);
     align-items:center;
+    transition:.3s;
+}
+.product-card:hover{
+    transform:translateY(-4px);
 }
 
 /* IMAGE */
 .product-image{
-    flex:1;
+    flex:0.9;
     text-align:center;
 }
 .product-image img{
     max-width:100%;
-    border-radius:12px;
+    max-height:360px;
+    filter:drop-shadow(0 15px 35px rgba(0,0,0,0.25));
 }
 
 /* CONTENT */
 .product-content{
-    flex:1.2;
+    flex:1.1;
 }
+
 .product-badge{
     display:inline-block;
     background:#ff7a00;
     color:#fff;
-    padding:6px 14px;
+    padding:6px 16px;
     border-radius:20px;
     font-size:13px;
     font-weight:600;
-    margin-bottom:12px;
+    margin-bottom:14px;
 }
+
 .product-content h3{
-    font-size:28px;
-    margin-bottom:12px;
+    font-size:30px;
+    margin-bottom:10px;
+    color:#222;
 }
+
+.product-meta{
+    font-size:14px;
+    color:#888;
+    margin-bottom:18px;
+}
+
 .product-content p{
     font-size:16px;
     color:#555;
-    line-height:1.7;
-    margin-bottom:20px;
+    line-height:1.75;
+    margin-bottom:22px;
 }
 
 /* FEATURES */
 .product-features{
     list-style:none;
-    margin-bottom:25px;
+    margin-bottom:28px;
 }
 .product-features li{
     font-size:15px;
     color:#444;
-    margin-bottom:8px;
+    margin-bottom:10px;
+    padding-left:24px;
     position:relative;
-    padding-left:20px;
 }
 .product-features li::before{
     content:"✔";
@@ -245,30 +320,62 @@
     font-weight:bold;
 }
 
-/* BUTTON */
+/* CTA */
+.product-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
 .product-btn{
-    display:inline-block;
     text-decoration:none;
-    background:#ff7a00;
-    color:#fff;
-    padding:12px 28px;
-    border-radius:30px;
+    padding:14px 32px;
+    border-radius:40px;
     font-size:15px;
     font-weight:600;
     transition:.3s;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
 }
-.product-btn:hover{
-    background:#e66b00;
+
+/* WhatsApp */
+.btn-whatsapp{
+    background:#25D366;
+    color:#fff;
+}
+.btn-whatsapp:hover{
+    background:#1ebe5d;
+}
+
+/* Outline */
+.btn-outline{
+    border:2px solid #ff7a00;
+    color:#ff7a00;
+}
+.btn-outline:hover{
+    background:#ff7a00;
+    color:#fff;
 }
 
 /* MOBILE */
 @media(max-width:900px){
+    #products{
+        padding:70px 16px;
+    }
+
     .product-card{
         flex-direction:column;
         text-align:center;
+        padding:30px 22px;
     }
+
     .product-content h3{
-        font-size:24px;
+        font-size:26px;
+    }
+
+    .product-actions{
+        justify-content:center;
     }
 }
 </style>
@@ -276,46 +383,68 @@
 <section id="products">
     <div class="products-container">
 
-        <!-- SECTION TITLE -->
+        <!-- TITLE -->
         <div class="section-title">
             <h2>आमचे उत्पादन</h2>
             <p>गावाकडच्या पारंपरिक चवीचा अस्सल अनुभव</p>
         </div>
 
-        <!-- PRODUCT -->
+        <!-- PRODUCT CARD -->
         <div class="product-card">
 
             <!-- IMAGE -->
             <div class="product-image">
-                <img src="{% static 'img/product-1.png' %}" alt="शिपी आमटी मिक्स मसाला">
+                <img 
+                  loading="lazy"
+                  src="{% static 'img/product-1.png' %}" 
+                  alt="शिपी आमटी मिक्स मसाला">
             </div>
 
             <!-- CONTENT -->
             <div class="product-content">
+
                 <div class="product-badge">Best Seller</div>
 
                 <h3>शिपी आमटी मिक्स मसाला</h3>
 
+                <div class="product-meta">
+                    वजन: 80 ग्रॅम | शुद्ध घरगुती मसाला
+                </div>
+
                 <p>
-                    पारंपरिक पद्धतीने तयार केलेला शिपी आमटी मिक्स मसाला.
-                    घरच्या घरी अस्सल गावाकडची आमटी बनवण्यासाठी खास मिश्रण.
-                    कोणतेही अतिरिक्त मसाले न घालता परिपूर्ण चव.
+                    पारंपरिक गावाकडच्या रेसिपीनुसार तयार केलेला
+                    शिपी आमटी मिक्स मसाला. कोणतेही कृत्रिम रंग
+                    किंवा केमिकल्स नसलेला, घरच्या घरी परिपूर्ण
+                    आमटी बनवण्यासाठी खास मिश्रण.
                 </p>
 
                 <ul class="product-features">
                     <li>अस्सल गावाकडची चव</li>
                     <li>घरगुती व स्वच्छ पद्धतीने तयार</li>
-                    <li>Easy to Cook</li>
+                    <li>Easy & Quick Cooking</li>
                     <li>कोणतेही कृत्रिम रंग नाहीत</li>
                 </ul>
 
-                <a href="#contact_us" class="product-btn">ऑर्डर साठी संपर्क करा</a>
+                <div class="product-actions">
+                    <a 
+                      href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे."
+                      target="_blank"
+                      class="product-btn btn-whatsapp">
+                      WhatsApp वर ऑर्डर करा
+                    </a>
+
+                    <a href="#how_to_use" class="product-btn btn-outline">
+                      वापरण्याची पद्धत
+                    </a>
+                </div>
+
             </div>
 
         </div>
 
     </div>
 </section>
+
 
 
 <style>
@@ -474,25 +603,26 @@
 
 
 <style>
-/* ========== HOW TO ORDER SECTION ========== */
+/* ========== HOW TO ORDER (MODERN) ========== */
 #how_to_order{
     width:100%;
-    padding:70px 20px;
-    background:#fafafa;
+    padding:90px 20px;
+    background:linear-gradient(180deg,#fafafa,#ffffff);
 }
 
+/* CONTAINER */
 .order-container{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
 }
 
 /* TITLE */
 .order-title{
     text-align:center;
-    margin-bottom:50px;
+    margin-bottom:60px;
 }
 .order-title h2{
-    font-size:34px;
+    font-size:36px;
     color:#222;
     margin-bottom:10px;
 }
@@ -501,87 +631,105 @@
     color:#666;
 }
 
-/* STEPS */
+/* STEPS GRID */
 .order-steps{
-    display:flex;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
     gap:30px;
-    justify-content:center;
 }
 
+/* STEP CARD */
 .order-step{
     background:#ffffff;
-    padding:30px 25px;
-    border-radius:16px;
+    padding:35px 28px;
+    border-radius:20px;
     text-align:center;
-    flex:1;
-    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    box-shadow:0 18px 40px rgba(0,0,0,0.08);
+    transition:.3s;
+}
+.order-step:hover{
+    transform:translateY(-6px);
 }
 
+/* NUMBER */
 .order-step span{
     display:inline-flex;
-    width:42px;
-    height:42px;
+    width:48px;
+    height:48px;
     border-radius:50%;
     background:#ff7a00;
     color:#fff;
     font-weight:700;
     align-items:center;
     justify-content:center;
-    margin-bottom:15px;
+    margin-bottom:18px;
     font-size:18px;
 }
 
+/* TEXT */
 .order-step h4{
-    font-size:18px;
+    font-size:19px;
     margin-bottom:10px;
     color:#222;
 }
 .order-step p{
-    font-size:15px;
+    font-size:15.5px;
     color:#555;
-    line-height:1.6;
+    line-height:1.7;
 }
 
-/* WHATSAPP CTA */
-.whatsapp-box{
-    margin-top:50px;
+/* WHATSAPP CTA BOX */
+.order-cta{
+    margin-top:70px;
+    background:#1f1f1f;
+    color:#fff;
+    padding:45px 30px;
+    border-radius:26px;
     text-align:center;
-    background:#ffffff;
-    padding:35px 20px;
-    border-radius:18px;
-    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    box-shadow:0 25px 50px rgba(0,0,0,0.25);
 }
-.whatsapp-box h3{
-    font-size:24px;
+
+.order-cta h3{
+    font-size:28px;
     margin-bottom:10px;
 }
-.whatsapp-box p{
+.order-cta p{
     font-size:16px;
-    color:#555;
-    margin-bottom:20px;
+    color:#ddd;
+    margin-bottom:28px;
 }
 
-.whatsapp-btn{
+/* BUTTON */
+.order-cta a{
     display:inline-flex;
     align-items:center;
     gap:10px;
     text-decoration:none;
     background:#25D366;
     color:#fff;
-    padding:14px 30px;
-    border-radius:30px;
-    font-size:16px;
-    font-weight:600;
+    padding:16px 36px;
+    border-radius:40px;
+    font-size:17px;
+    font-weight:700;
     transition:.3s;
 }
-.whatsapp-btn:hover{
+.order-cta a:hover{
     background:#1ebe5d;
+    transform:scale(1.03);
 }
 
 /* MOBILE */
 @media(max-width:900px){
+    #how_to_order{
+        padding:70px 16px;
+    }
+
     .order-steps{
-        flex-direction:column;
+        grid-template-columns:1fr;
+    }
+
+    .order-cta h3{
+        font-size:24px;
     }
 }
 </style>
@@ -592,7 +740,7 @@
         <!-- TITLE -->
         <div class="order-title">
             <h2>ऑर्डर कशी करावी</h2>
-            <p>फक्त WhatsApp वरून सोपी आणि जलद ऑर्डर प्रक्रिया</p>
+            <p>फक्त WhatsApp वरून सोपी, जलद आणि सुरक्षित ऑर्डर प्रक्रिया</p>
         </div>
 
         <!-- STEPS -->
@@ -600,17 +748,19 @@
 
             <div class="order-step">
                 <span>1</span>
-                <h4>WhatsApp वर संपर्क करा</h4>
+                <h4>WhatsApp वर मेसेज करा</h4>
                 <p>
-                    खाली दिलेल्या WhatsApp बटणावर क्लिक करून आम्हाला मेसेज करा.
+                    खाली दिलेल्या WhatsApp बटणावर क्लिक करून
+                    आम्हाला “शिपी आमटी मिक्स मसाला” असा मेसेज पाठवा.
                 </p>
             </div>
 
             <div class="order-step">
                 <span>2</span>
-                <h4>ऑर्डर तपशील पाठवा</h4>
+                <h4>ऑर्डर तपशील द्या</h4>
                 <p>
-                    उत्पादनाचे नाव, प्रमाण आणि तुमचा पत्ता WhatsApp वर पाठवा.
+                    किती पॅक हवेत, तुमचा पूर्ण पत्ता
+                    आणि मोबाईल नंबर WhatsApp वर पाठवा.
                 </p>
             </div>
 
@@ -618,48 +768,54 @@
                 <span>3</span>
                 <h4>डिलिव्हरी मिळवा</h4>
                 <p>
-                    ऑर्डर कन्फर्म झाल्यानंतर तुमच्या पत्त्यावर आमटी मसाला पोहोचवला जाईल.
+                    ऑर्डर कन्फर्म झाल्यानंतर
+                    तुमच्या पत्त्यावर आमटी मसाला पाठवला जाईल.
                 </p>
             </div>
 
         </div>
 
-        <!-- WHATSAPP CTA -->
-        <div class="whatsapp-box">
+        <!-- CTA -->
+        <div class="order-cta">
             <h3>आत्ताच ऑर्डर करा</h3>
-            <p>खालील WhatsApp बटणावर क्लिक करा आणि ऑर्डर सुरू करा</p>
+            <p>खालील WhatsApp बटणावर क्लिक करून ऑर्डर सुरू करा</p>
 
-            <!-- Replace phone number -->
             <a 
-               href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे."
-               target="_blank"
-               class="whatsapp-btn">
-               WhatsApp वर ऑर्डर करा
+              href="https://wa.me/919730268423?text=नमस्कार,%20मला%20शिपी%20आमटी%20मिक्स%20मसाला%20ऑर्डर%20करायचा%20आहे."
+              target="_blank">
+              WhatsApp वर ऑर्डर करा
             </a>
         </div>
 
     </div>
 </section>
+
+
+
+
+
 <style>
-/* ========== GALLERY SECTION ========== */
+/* ========== GALLERY SECTION (MODERN) ========== */
 #gallery{
     width:100%;
-    padding:70px 20px;
+    padding:90px 20px;
+    padding-top: 0;
     background:#ffffff;
 }
 
+/* CONTAINER */
 .gallery-container{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
 }
 
 /* TITLE */
 .gallery-title{
     text-align:center;
-    margin-bottom:50px;
+    margin-bottom:60px;
 }
 .gallery-title h2{
-    font-size:34px;
+    font-size:36px;
     color:#222;
     margin-bottom:10px;
 }
@@ -672,24 +828,50 @@
 .gallery-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:22px;
+    gap:26px;
 }
 
-/* IMAGE CARD */
+/* CARD */
 .gallery-item{
+    position:relative;
     overflow:hidden;
-    border-radius:16px;
-    box-shadow:0 12px 30px rgba(0,0,0,0.1);
+    border-radius:20px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.12);
     cursor:pointer;
 }
+
+/* IMAGE */
 .gallery-item img{
     width:100%;
     height:100%;
     object-fit:cover;
-    transition:transform .4s ease;
+    transition:transform .5s ease;
 }
+
+/* OVERLAY */
+.gallery-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,0.65));
+    opacity:0;
+    display:flex;
+    align-items:flex-end;
+    padding:20px;
+    transition:.4s;
+}
+
+.gallery-overlay span{
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+}
+
+/* HOVER */
 .gallery-item:hover img{
-    transform:scale(1.08);
+    transform:scale(1.1);
+}
+.gallery-item:hover .gallery-overlay{
+    opacity:1;
 }
 
 /* MOBILE */
@@ -714,24 +896,38 @@
             <p>शिपी आमटी मिक्स मसाल्याची झलक</p>
         </div>
 
-        <!-- IMAGES -->
+        <!-- GRID -->
         <div class="gallery-grid">
 
-            <!-- Replace images as needed -->
             <div class="gallery-item">
-                <img src="{% static 'img/galery1.jpeg' %}" >
+                <img loading="lazy" src="{% static 'img/galery1.jpeg' %}" alt="शिपी आमटी">
+                <div class="gallery-overlay">
+                    <span>अस्सल गावाकडची चव</span>
+                </div>
             </div>
 
             <div class="gallery-item">
-                <img src="{% static 'img/galery2.jpeg' %}" >
+                <img loading="lazy" src="{% static 'img/galery2.jpeg' %}" alt="शिपी आमटी मसाला">
+                <div class="gallery-overlay">
+                    <span>घरगुती आणि शुद्ध मसाला</span>
+                </div>
             </div>
 
-
+            <!-- Add more images later easily -->
+            <!--
+            <div class="gallery-item">
+                <img src="{% static 'img/galery3.jpeg' %}">
+                <div class="gallery-overlay">
+                    <span>परंपरेची चव</span>
+                </div>
+            </div>
+            -->
 
         </div>
 
     </div>
 </section>
+
 
 
 
@@ -809,13 +1005,12 @@
     }
 }
 </style>
-
 <section id="about_us">
     <div class="about-container">
 
         <!-- IMAGE -->
         <div class="about-image">
-            <img src="{% static 'img/galery1.jpeg' %}" alt="शिपी आमटी">
+            <img  loading="lazy" src="{% static 'img/galery1.jpeg' %}" alt="शिपी आमटी">
         </div>
 
         <!-- CONTENT -->
@@ -977,7 +1172,7 @@
 
                 <div class="contact-item">
                     <h4>मोबाइल नंबर</h4>
-                    <p>+91 919730268423</p>
+                    <p>+91 9730268423</p>
                 </div>
 
                 <div class="contact-item">
@@ -1277,7 +1472,7 @@ footer{
         <!-- CONTACT -->
         <div class="footer-box footer-contact">
             <h4>संपर्क</h4>
-            <p>📞 +91 919730268423</p>
+            <p>📞 +91 9730268423</p>
             <p>✉️ shiraskarshipiamti@gmail.com</p>
             <p>
                 📍 शिपी आमटी,<br>
